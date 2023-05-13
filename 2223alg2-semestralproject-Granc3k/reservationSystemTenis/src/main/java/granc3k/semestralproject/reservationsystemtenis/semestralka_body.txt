@@ -1,0 +1,26 @@
+Menu, které umožní opakovaný výběr funkcí aplikácie a ukončení aplikace                                             DONE
+Víceúrovňové menu - zobrazovat vždy jenom zrovna dostupné  volby                                                    DONE
+Přehledný výpis výsledků na konzoli - použijte alespoň jednou String.format() a StringBuilder                       DONE
+Načítání vstupních dat z minimálně dvou souborů                                                                     TODO
+Zápis nových výstupních dat do souboru                                                                              částečně DONE
+Možnost výběru práce s textovými nebo binárními soubory (načítání i výpis)                                          TODO
+Kontrolní program pro výpis binárního souboru                                                                       TODO
+Ideálně využití reálných otevřených dat                                                                             DONE
+Adresář data (na rovnaké úrovni jako src) se všemi datovými soubory a případně třídu Datastore se statickými metodami, které budou poskytovat další statická data   DONE
+Nastavení cesty k adresáři data uživatelem na začátku programu, nebo v konfiguračním souboru                        DONE (v souboru)
+Rozdělení tříd do balíčků. Např.
+ui – třídy, tvořící uživatelské rozhraní - komunikaci s uživatelem (Scanner, System.out.print)                      DONE
+app – třídy, tvořící logiku a práci s daty - modely, kontrolery                                                     DONE
+utils – pomocné třídy např. vlastní výjimky, vlastní rozhraní                                                       DONE
+Programování vůči rozhraní a použití vlastního rozhraní                                                             DONE
+Použití java.time API pro práci s časem                                                                             TODO
+Použít enum typ                                                                                                     TODO
+Použití kontejnerové třídy jazyka Java (ArrayList, LinkedList, HashMap ...) z Collections frameworku.               DONE
+Alespoň dvě možnosti třídění s využitím rozhraní Comparable a Comparator                                            TODO
+Použití regulárního výrazu                                                                                          DONE
+Ošetření vstupů, aby chybné vstupy nezpůsobily pád programu - pomocí existujících a vlastních výjimek               TODO
+Vhodné ošetření povinně ošetřovaných výjimek                                                                        SERU
+Použití Vámi vybrané externí knihovny (audio, posílání emailů, práce s obrázkem, junit testování, jiné formáty uložení dat ...)   DONE
+Javadoc - každá třída a metoda musí mít javadoc popis, abyste mohli na závěr vygenerovat javadoc dokumentaci        TODO
+Vhodné hlášky pro uživatele nebo Help, aby mohl aplikaci otestovat i ten, kdo ji netvořil                           DONE
+
