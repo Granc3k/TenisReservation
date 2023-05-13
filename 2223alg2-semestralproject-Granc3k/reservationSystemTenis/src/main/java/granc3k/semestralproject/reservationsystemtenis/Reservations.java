@@ -257,7 +257,7 @@ public class Reservations {
     }
     public void loadFromFile(int param) throws IOException {
         Gson gson = new Gson();
-        this.reservationList = gson.fromJson(new FileReader("./data/"+param+".json"),  new TypeToken<ArrayList<Reservation>>(){}.getType());
+        this.reservationList = gson.fromJson(new FileReader("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/save_"+param+".json"),  new TypeToken<ArrayList<Reservation>>(){}.getType());
         loadTimes();
     }
     private void loadTimes(){
@@ -270,10 +270,9 @@ public class Reservations {
         reservedTimes[temp.getDay()-1][temp.getCourt()-1].setTimes(temp.getStart(), temp.getEnd(), temp.getCus());
     }
     public void saveToFile(int param) throws IOException {
-        //new File("./data/").mkdirs();
         Gson gson = new Gson();
         String serialized = gson.toJson(reservationList);
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("./data/save_"+param+".json"))){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/save_"+param+".json"))){
             writer.write(serialized, 0, serialized.length());
         }
     }
