@@ -6,9 +6,12 @@ import java.util.Scanner;
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
-
+    /**
+     * main method for program
+     * contains UI
+     * calls other files and methods in them
+     */
     public static void main(String[] args) throws IOException {
-        //saving and loading files
         //vars for code
         String command;
         boolean end = false;
@@ -17,22 +20,14 @@ public class Main {
         int thisWeek = LocalDateTime.now().getDayOfYear()/7 ;
         int nextWeek = (LocalDateTime.now().getDayOfYear()/7)+1;
         boolean switchedWeeks = false;
+        String prompt = "current_"+thisWeek;
 
         //used for switching between codes
         Reservations reservations = reservations_current;
+
         //loading from files
         try{
             reservations_current.loadFromFile(thisWeek);
-           /* Arrays.stream(new File("./data/").listFiles())
-                    .parallel()
-                    .forEach(file -> {
-                        try {
-                            reservations.loadFromFile(file.getName().replace(".json", ""));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            System.err.println("Could not load file");
-                        }
-                    });*/
         }catch (Exception e){
             //e.printStackTrace();  //for debug
             System.err.println("Nepodařilo se načíst soubor aktuálního týdne...");
@@ -48,7 +43,7 @@ public class Main {
         System.out.println("Spouštím rezervační systém");
         while(!end){
             vypisMenu();
-            System.out.print(">");
+            System.out.print(prompt+">");
             command = sc.next();
             String[] parts = command.split(" ");
             try{//switch for commands
@@ -72,13 +67,17 @@ public class Main {
                     case "endres","6" -> Commands.endRes(reservations,parts);
                     case "switch","7" ->{
                         if(switchedWeeks){
+                            //switch to current week
                             reservations_next = reservations;
                             reservations = reservations_current;
                             switchedWeeks=false;
+                            prompt="current_"+thisWeek;
                         }else {
+                            //switch to next week
                             reservations_current = reservations;
                             reservations = reservations_next;
                             switchedWeeks=true;
+                            prompt="next_"+nextWeek;
                         }
                     }
                     case "exit" -> {
@@ -89,6 +88,8 @@ public class Main {
                     }
                     default -> System.out.println("Zadal jste něco špatně!");
                 }
+
+                System.out.println();//prints out empty line
             } catch (Exception e) {
                 //e.printStackTrace();  //debug
                 System.err.println("Něco se pokazilo...\n"+
