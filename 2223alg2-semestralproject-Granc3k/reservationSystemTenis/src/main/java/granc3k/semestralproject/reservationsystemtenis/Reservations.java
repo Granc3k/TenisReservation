@@ -8,15 +8,26 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Reservations {
+    //price for one court for one hour
     static final int cena = 300;
+    //list with reservations
     private ArrayList<Reservation> reservationList;
+    //2D array with objects of time
     private final Times[][] reservedTimes;
     public static Scanner sc = new Scanner(System.in);
+
+    /**
+     * constructor for Reservations object
+     */
     public Reservations() {
         this.reservationList = new ArrayList<Reservation>();
         this.reservedTimes = new Times[7][6];//7 days in week and 6 courts
         fillTimes();
     }
+
+    /**
+     * fills 2D array of object Times with -1
+     */
     private void fillTimes(){
         for (int i = 0; i < reservedTimes.length; i++) {
             for(int j=0;j<reservedTimes[i].length;j++){
@@ -24,6 +35,9 @@ public class Reservations {
             }
         }
     }
+    /**
+     * makes reservation via input
+     */
     public void makeRes() {
         System.out.println("Rezervující: ");
         String customer = sc.next();
@@ -45,6 +59,9 @@ public class Reservations {
 
         makeRes(customer, players, day, court, start, end);
     }
+    /**
+     * makes reservation with inputted parameters
+     */
     public void makeRes(String customer, int players, int day, int court, int start, int end) {
         if (isFree(day, court, start,end)) {
             Reservation temp = new Reservation(customer, players, day, court, start, end);
@@ -53,6 +70,9 @@ public class Reservations {
             System.out.println("Rezervace byla vytvořena");
         }
     }
+    /**
+     * checks if the specific time is free
+     */
     public boolean isFree(int day,int court,int start, int end) {
         boolean result = true;
         StringBuilder vypis = new StringBuilder("Kolize v časech: ");
@@ -67,6 +87,9 @@ public class Reservations {
         }
         return result;
     }
+    /**
+     * removes reservation via input
+     */
     public void removeReservation(){
         System.out.println("Rezervující: ");
         String customer = sc.next();
@@ -82,12 +105,18 @@ public class Reservations {
 
         removeReservation(customer,day,court,start);
     }
+    /**
+     * removes reservation with inputted parameters
+     */
     public void removeReservation(String customer,int day,int court, int start ){
         reservedTimes[day-1][court-1].remTimes(start, customer);
         reservationList.removeIf(temp -> start == temp.getStart() && day == temp.getDay() && customer.equals(temp.getCus()));
 
         System.out.println("Rezervace byla zrušena");
     }
+    /**
+     * edits reservation via input
+     */
     public void editReservation(){
         System.out.println("Jméno rezervujícího: ");
         String customer = sc.next();
@@ -99,6 +128,9 @@ public class Reservations {
         int start = hours(sc.next());
         editReservation(customer,day,court,start);
     }
+    /**
+     * edits reservation with inputted parameters
+     */
     public void editReservation(String customer, int day,int court,int start){
         boolean wasFound = false;
         for(int i = 0;i<reservationList.size();i++){
@@ -123,6 +155,10 @@ public class Reservations {
             System.out.println("Rezervace nebyla nalezena pro editaci");
         }
     }
+    /**
+     * prints out choices for editing
+     * @return int for switch
+     */
     public int editMenu(){
         System.out.println("Zadejte možnost kterou chcete editovat u této rezervace:\n"+
         "1 - pro editaci rezervujícího\n"+
@@ -133,6 +169,9 @@ public class Reservations {
         "6 - pro editaci celé rezervace");
         return sc.nextInt();
     }
+    /**
+     * prints out amount that needs to be paid via input
+     */
     public void endReservation(){
         System.out.println("Rezervující:");
         String customer = sc.next();
@@ -142,6 +181,9 @@ public class Reservations {
         int start = hours(sc.next());
         endReservation(customer,day,start);
     }
+    /**
+     * prints out amount that needs to be paid with inputted parameters
+     */
     public void endReservation(String customer,int day,int start){
         String vypis="Nebyla nalezena rezervace";
         for(Reservation temp :reservationList){
@@ -152,11 +194,17 @@ public class Reservations {
         }
         System.out.println(vypis);;
     }
+    /**
+     * prints out reservations of specific customer for this week via input
+     */
     public void allCustomerReservationsForWeek(){
         System.out.println("Zadejte jméno rezervujícího:");
         String customer = sc.next();
         allCustomerReservationsForWeek(customer);
     }
+    /**
+     * prints out reservations of specific customer for this week with inputted parameters
+     */
     public void allCustomerReservationsForWeek(String customer) {
         boolean vypsalo = false;
         for(Reservation temp:reservationList){
@@ -171,6 +219,9 @@ public class Reservations {
             System.out.println("Zákazník neměl žádné rezervace");
         }
     }
+    /**
+     * prints out reservations of specific customer for specific day in this week via input
+     */
     public void allCustomerReservationsForDay(){
         System.out.println("Zadejte jméno rezervujícího:");
         String customer = sc.next();
@@ -179,6 +230,9 @@ public class Reservations {
         allCustomerReservationsForDay(customer,day);
 
     }
+    /**
+     * prints out reservations of specific customer for specific day in this week with inputted parameters
+     */
     public void allCustomerReservationsForDay(String customer,int day){
         boolean vypsalo = false;
         for(Reservation temp:reservationList){
@@ -193,11 +247,17 @@ public class Reservations {
             System.out.println("Zákazník neměl žádné rezervace v tento den");
         }
     }
+    /**
+     * prints out reservations of specific customer for today via input
+     */
     public void allCustomerReservationsForToday(){
         System.out.println("Rezervující");
         String customer = sc.next();
         allCustomerReservationsForToday(customer);
     }
+    /**
+     * prints out reservations of specific customer for today with inputted parameters
+     */
     public void allCustomerReservationsForToday(String customer){
         boolean vypsalo = false;
         for(Reservation temp:reservationList){
@@ -213,17 +273,30 @@ public class Reservations {
             System.out.println("Zákazník nemá dnes žádnou rezervaci");
         }
     }
+    /**
+     * prints out what time is free today
+     */
     public void whatIsFreeToday(){
 
     }
+    /**
+     * prints out what time is free on specific day
+     */
     public void whatIsFreeDay(int day){
         for(int i =0;i<6;i++){
             //TODO
         }
     }
+    /**
+     * prints out what time is free in this week
+     */
     public void whatIsFree(){
         //TODO
     }
+    /**
+     * takes day in String form and translates it to int form
+     * (for example param is monday; return is 1)
+     */
     public static int whichDay(String a) {
         return switch (a) {
             case "pondeli", "pondělí", "Pondělí", "Pondeli", "1","monday"-> 1;
@@ -236,6 +309,10 @@ public class Reservations {
             default -> throw new IllegalStateException("Neočekávaná hodnota: " + a);
         };
     }
+    /**
+     * takes day in int form and translates it to String form
+     * (for example param is 1; return is ponděli)
+     */
     public static String whichDay(int a) {
         return switch (a) {
             case 1 -> "pondeli";
@@ -248,27 +325,42 @@ public class Reservations {
             default -> throw new IllegalStateException("Neočekávaná hodnota: " + a);
         };
     }
+    /**
+     * takes time in String form and translates it to int form
+     * (for example input is 14:00; return is 14)
+     */
     public static int hours(String a) {
         String[] parts = a.split(":");
         return Integer.parseInt(parts[0]);
     }
+    /**
+     * takes time in int form and translates it to String form
+     * (for example input is 14; return is 14:00)
+     */
     public static String hours(int a) {
         return a + ":00";
     }
+    /**
+     * loads data from file
+     * @param param - number of week
+     */
     public void loadFromFile(int param) throws IOException {
         Gson gson = new Gson();
         this.reservationList = gson.fromJson(new FileReader("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/save_"+param+".json"),  new TypeToken<ArrayList<Reservation>>(){}.getType());
         loadTimes();
     }
+    /**
+     * automatic load of 2D array of objects
+     */
     private void loadTimes(){
         for(Reservation temp:reservationList){
                 reservedTimes[temp.getDay()-1][temp.getCourt()-1].setTimes(temp.getStart(),temp.getEnd(), temp.getCus());
         }
     }
-    public void addReservation(Reservation temp){
-        reservationList.add(temp);
-        reservedTimes[temp.getDay()-1][temp.getCourt()-1].setTimes(temp.getStart(), temp.getEnd(), temp.getCus());
-    }
+    /**
+     * saves data from reservationList to .json file
+     * @param param - number of week
+     */
     public void saveToFile(int param) throws IOException {
         Gson gson = new Gson();
         String serialized = gson.toJson(reservationList);
