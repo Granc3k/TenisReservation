@@ -21,6 +21,7 @@ public class Main {
         int nextWeek = (LocalDateTime.now().getDayOfYear()/7)+1;
         boolean switchedWeeks = false;
         String prompt = "current_"+thisWeek;
+        boolean debug = false;
 
         //used for switching between codes
         Reservations reservations = reservations_current;
@@ -65,7 +66,18 @@ public class Main {
                     }
                     case "isres","5" -> Commands.isRes(reservations,parts);
                     case "endres","6" -> Commands.endRes(reservations,parts);
-                    case "switch","7" ->{
+                    case "isfree","7"-> {
+                        System.out.println("dnes -- pro výpis dneška\n" +
+                                "den -- pro výpis dne\n" +
+                                "tyden -- pro výpis týdne");
+                        String decision = sc.next();
+                        switch (decision) {
+                            case "tyden", "week", "w" -> Commands.whatIsFreeWeek(reservations, parts);
+                            case "den", "day", "d" -> Commands.whatIsFreeDay(reservations, parts);
+                            case "dnes", "today", "t" -> Commands.whatIsFreeToday(reservations);
+                        }
+                    }
+                    case "switch","8" ->{
                         if(switchedWeeks){
                             //switch to current week
                             reservations_next = reservations;
@@ -86,12 +98,12 @@ public class Main {
                         reservations_next.saveToFile(nextWeek);
                         end = true;
                     }
+                    case "debug" -> debug=!debug;
                     default -> System.out.println("Zadal jste něco špatně!");
                 }
-
                 System.out.println();//prints out empty line
             } catch (Exception e) {
-                //e.printStackTrace();  //debug
+                if(debug){e.printStackTrace();}  //debug
                 System.err.println("Něco se pokazilo...\n"+
                                     "zkuste to znovu");
             }
@@ -106,7 +118,8 @@ public class Main {
         "4 - pro výpis rezervací\n"+
         "5 - pro zjištění, zda zadané místo je volné\n"+
         "6 - pro výpis ceny pro zaplacení reservations\n"+
-        "7 - pro přepnutí aktuálního týdne s následujícím\n"+
+        "7 - pro výpis volných časů\n"+
+        "8 - pro přepnutí aktuálního týdne s následujícím\n"+
         "help - pro pomoc se zadáváním hodnot, nebo příkazů\n"+
         "exit - pro vypnutí programu");
     }

@@ -63,7 +63,7 @@ public class Reservations {
      * makes reservation with inputted parameters
      */
     public void makeRes(String customer, int players, int day, int court, int start, int end) {
-        if (isFree(day, court, start,end)) {
+        if (!isRes(day, court, start,end)) {
             Reservation temp = new Reservation(customer, players, day, court, start, end);
             reservationList.add(temp);
             reservedTimes[day-1][court-1].setTimes(start, end,customer);
@@ -73,7 +73,7 @@ public class Reservations {
     /**
      * checks if the specific time is free via input
      */
-    public boolean isFree(){
+    public boolean isRes(){
         System.out.println("Den:");
         int day = whichDay(sc.next());
         System.out.println("Kurt:");
@@ -82,21 +82,21 @@ public class Reservations {
         int start = whichDay(sc.next());
         System.out.println("Do kdy:");
         int end = whichDay(sc.next());
-        return isFree(day,court,start,end);
+        return isRes(day,court,start,end);
     }
     /**
      * checks if the specific time is free
      */
-    public boolean isFree(int day,int court,int start, int end) {
-        boolean result = true;
+    public boolean isRes(int day,int court,int start, int end) {
+        boolean result = false;
         StringBuilder vypis = new StringBuilder("Kolize v časech: ");
         for(int i=start;i<end;i++){
             if(reservedTimes[day-1][court-1].isReserved(i)){
                 vypis.append(hours(i)).append(", ");
-                result = false;
+                result = true;
             }
         }
-        if(!result){
+        if(result){
             System.out.println(vypis);
         }
         return result;
@@ -296,7 +296,15 @@ public class Reservations {
         whatIsFreeDay(day);
     }//TODO implementation
     /**
-     * prints out what time is free on specific day
+     * prints out what time is free on specific day via input
+     */
+    public void whatIsFreeDay(){
+        System.out.println("Den:");
+        int day = whichDay(sc.next());
+        whatIsFreeDay(day);
+    }
+    /**
+     * prints out what time is free on specific day, with inputted parameters
      */
     public void whatIsFreeDay(int day){
         String vypis;
@@ -309,11 +317,11 @@ public class Reservations {
             }
             System.out.println(vypis);
         }
-    }//TODO implementation
+    }
     /**
      * prints out what time is free in this week
      */
-    public void whatIsFree(){
+    public void whatIsFreeWeek(){
         String vypis;
         for(int i = 0; i<reservedTimes.length;i++){
             for(int j =0;j<reservedTimes[i].length;j++){
@@ -325,7 +333,7 @@ public class Reservations {
                 }
             }
         }
-    }//TODO implementation
+    }
     /**
      * takes day in String form and translates it to int form
      * (for example param is monday; return is 1)

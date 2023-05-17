@@ -83,15 +83,15 @@ public class Commands {
                 int court = Integer.parseInt(b[2]);
                 int start = Reservations.hours(b[3]);
                 int end = Reservations.hours(b[4]);
-                decission=!a.isFree(day,court,start,end);
+                decission=a.isRes(day,court,start,end);
             } else {
                 //via input
                 System.out.println("Příkaz byl zadán špatně!\n"+ "Spouštím verzi pro doplnění parametrů");
-                decission=!a.isFree();
+                decission=!a.isRes();
             }
         }else{
             //via input
-            decission=!a.isFree();
+            decission=!a.isRes();
         }
         if(decission){
             System.out.println("V tento čas je již udělaná rezervace");
@@ -180,6 +180,28 @@ public class Commands {
             a.allCustomerReservationsForToday();
         }
     }
+    public static void whatIsFreeWeek(Reservations a, String[] b){
+        a.whatIsFreeWeek();
+    }
+    public static void whatIsFreeDay(Reservations a, String[] b) {
+        if (b.length > 1) {
+            if (b.length == 2) {
+                a.whatIsFreeDay(Reservations.hours(b[1]));
+            }
+            //via input
+            System.out.println("Příkaz byl zadán špatně!\n" + "Spouštím verzi pro doplnění parametrů");
+            a.whatIsFreeDay();
+        } else {
+            //via input
+            a.whatIsFreeDay();
+        }
+    }
+    public static void whatIsFreeToday(Reservations a){
+        a.whatIsFreeToday();
+    }
+
+
+
     /**
      * help command
      * prints out necessary information to every command
@@ -187,35 +209,40 @@ public class Commands {
     public static void help() {
         System.out.println("Tvoření rezervace:\n"+
         "\n"+
-        "res/1 -- vytváří rezervaci, uživatel doplní parametry\n"+
-        "res/1 [rezervující(ve tvaru jmeno.prijmeni)] [počet hráčů] [den (textem)] [číslo kurtu] [od kdy (ve formátu xx:00)][do kdy (ve formátu xx:00)]\n"+
+        "1/res -- vytváří rezervaci, uživatel doplní parametry\n"+
+        "1/res [rezervující(ve tvaru jmeno.prijmeni)] [počet hráčů] [den (textem)] [číslo kurtu] [od kdy (ve formátu xx:00)][do kdy (ve formátu xx:00)]\n"+
         "\n"+
         "Editace rezervace\n"+
         "\n"+
-        "edit/2 -- edituje stávající rezervaci, uživatel doplní parametry\n"+
-        "edit/2 [rezervující(ve tvaru jmeno.prijmeni)] [den (textem)] [číslo kurtu] [od kdy (ve formátu xx:00)]\n"+
+        "2/edit -- edituje stávající rezervaci, uživatel doplní parametry\n"+
+        "2/edit [rezervující(ve tvaru jmeno.prijmeni)] [den (textem)] [číslo kurtu] [od kdy (ve formátu xx:00)]\n"+
         "\n"+
         "Odstranění rezervace:\n"+
         "\n"+
-        "rem/3 -- odstraní rezervaci, uživatel doplní parametry\n"+
-        "rem/3 [rezervující(ve tvaru jmeno.prijmeni)] [den (textem)] [od kdy (ve formátu xx:00)]\n"+
+        "3/rem -- odstraní rezervaci, uživatel doplní parametry\n"+
+        "3/rem [rezervující(ve tvaru jmeno.prijmeni)] [den (textem)] [od kdy (ve formátu xx:00)]\n"+
         "\n"+
         "Výpis rezervací:\n"+
         "\n"+
-        "list/4 dnes/today/t -- vypíše rezervace zákazníka, uživatel doplní parametry\n"+
-        "list/4 dnes/today/t [rezervující(ve tvaru jmeno.prijmeni)]\n"+
-        "list/4 tyden/week/w -- vypíše rezervace zákazníka na týden, uživatel doplní parametry\n"+
-        "list/4 tyden/week/w [rezervující(ve tvaru jmeno.prijmeni)]\n"+
-        "list/4 den/day/d -- vypíše rezervace zákazníka v určitý den, uživatel doplní parametry\n"+
-        "list/4 den/day/d [rezervující(ve tvaru jmeno.prijmeni)][den (textem)]\n"+
+        "4/list dnes/today/t -- vypíše rezervace zákazníka, uživatel doplní parametry\n"+
+        "4/list dnes/today/t [rezervující(ve tvaru jmeno.prijmeni)]\n"+
+        "4/list tyden/week/w -- vypíše rezervace zákazníka na týden, uživatel doplní parametry\n"+
+        "4/list tyden/week/w [rezervující(ve tvaru jmeno.prijmeni)]\n"+
+        "4/list den/day/d -- vypíše rezervace zákazníka v určitý den, uživatel doplní parametry\n"+
+        "4/list den/day/d [rezervující(ve tvaru jmeno.prijmeni)][den (textem)]\n"+
         "\n"+
         "Je rezervován tento termín:\n"+
-        "teprve se doladí\n"+
-        "\n"+
+        "5/isres -- vypíše zda je místo volné v zadaném čase, či kolizi v určitých časech, uživatel doplní parametry\n"+
+        "5/isres [den (textem)] [číslo kurtu] [od kdy(ve formátu xx:00)][do kdy (ve formátu xx:00)]\n"+
         "Ukončení rezervace:\n"+
-        "endres/5 -- spočítá kolik je třeba zaplatit za daný kurt, uživatel doplní parametry\n"+
-        "endres/5 [rezervující(ve tvaru jmeno.prijmeni)] [den (textem)] [od kdy (ve formátu xx:00)]\n"+
+        "6/endres -- spočítá kolik je třeba zaplatit za daný kurt, uživatel doplní parametry\n"+
+        "6/endres [rezervující(ve tvaru jmeno.prijmeni)] [den (textem)] [od kdy (ve formátu xx:00)]\n"+
         "\n"+
+        "Vypsání, co je volné:\n"+
+        "7/free\n"+
+        "7/free\n"+
+        "Přepnutí týdne:\n"+
+        "8/switch\n"+
         "Ukončení programu:\n"+
         "exit -- ukončí program a uloží data do souborů");
 
