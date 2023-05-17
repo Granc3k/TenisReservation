@@ -71,6 +71,20 @@ public class Reservations {
         }
     }
     /**
+     * checks if the specific time is free via input
+     */
+    public boolean isFree(){
+        System.out.println("Den:");
+        int day = whichDay(sc.next());
+        System.out.println("Kurt:");
+        int court = sc.nextInt();
+        System.out.println("Od kdy:");
+        int start = whichDay(sc.next());
+        System.out.println("Do kdy:");
+        int end = whichDay(sc.next());
+        return isFree(day,court,start,end);
+    }
+    /**
      * checks if the specific time is free
      */
     public boolean isFree(int day,int court,int start, int end) {
@@ -277,22 +291,41 @@ public class Reservations {
      * prints out what time is free today
      */
     public void whatIsFreeToday(){
-
-    }
+        LocalDateTime date = LocalDateTime.now();
+        int day = date.getDayOfWeek().getValue();
+        whatIsFreeDay(day);
+    }//TODO implementation
     /**
      * prints out what time is free on specific day
      */
     public void whatIsFreeDay(int day){
-        for(int i =0;i<6;i++){
-            //TODO
+        String vypis;
+        for(int i = 0 ; i< reservedTimes[day-1].length;i++){
+            vypis = "V +"+whichDay(day)+"je volno na kurtu číslo: "+i+1+"v tyto časy: ";
+            for(int j =0;j<24;j++){
+                if (!reservedTimes[day-1][i].isReserved(j)){
+                    vypis+=whichDay(j)+", ";
+                }
+            }
+            System.out.println(vypis);
         }
-    }
+    }//TODO implementation
     /**
      * prints out what time is free in this week
      */
     public void whatIsFree(){
-        //TODO
-    }
+        String vypis;
+        for(int i = 0; i<reservedTimes.length;i++){
+            for(int j =0;j<reservedTimes[i].length;j++){
+                vypis = "V +"+whichDay(i)+"je volno na kurtu číslo: "+j+1+"v tyto časy: ";
+                for (int k = 0;k<24;k++){
+                    if (!reservedTimes[i][j].isReserved(k)){
+                        vypis+=whichDay(k)+", ";
+                    }
+                }
+            }
+        }
+    }//TODO implementation
     /**
      * takes day in String form and translates it to int form
      * (for example param is monday; return is 1)

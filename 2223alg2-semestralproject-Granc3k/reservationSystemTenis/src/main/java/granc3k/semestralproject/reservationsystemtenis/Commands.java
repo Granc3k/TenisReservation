@@ -75,6 +75,7 @@ public class Commands {
      * @param b is a param for parsed String used for commands
      */
     public static void isRes(Reservations a, String[] b){
+        boolean decission;
         if (b.length > 1) {
             if (b.length == 5) {
                 //via command without necessary input
@@ -82,18 +83,22 @@ public class Commands {
                 int court = Integer.parseInt(b[2]);
                 int start = Reservations.hours(b[3]);
                 int end = Reservations.hours(b[4]);
-                ;
+                decission=!a.isFree(day,court,start,end);
             } else {
                 //via input
                 System.out.println("Příkaz byl zadán špatně!\n"+ "Spouštím verzi pro doplnění parametrů");
-                ;
+                decission=!a.isFree();
             }
         }else{
             //via input
-            ;
+            decission=!a.isFree();
+        }
+        if(decission){
+            System.out.println("V tento čas je již udělaná rezervace");
+        }else{
+            System.out.println("Tento čas je volný");
         }
     }
-    //TODO
 
     /**
      * ends reservation and prints out amount of money to pay
@@ -215,5 +220,5 @@ public class Commands {
         "exit -- ukončí program a uloží data do souborů");
 
     }
-    //TODO
+    //TODO bod 6,7,8
 }
