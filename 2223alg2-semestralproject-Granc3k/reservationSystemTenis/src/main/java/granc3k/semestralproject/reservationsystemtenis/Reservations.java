@@ -294,7 +294,7 @@ public class Reservations {
         LocalDateTime date = LocalDateTime.now();
         int day = date.getDayOfWeek().getValue();
         whatIsFreeDay(day);
-    }//TODO implementation
+    }
     /**
      * prints out what time is free on specific day via input
      */

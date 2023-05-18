@@ -234,15 +234,16 @@ public class Commands {
         "Je rezervován tento termín:\n"+
         "5/isres -- vypíše zda je místo volné v zadaném čase, či kolizi v určitých časech, uživatel doplní parametry\n"+
         "5/isres [den (textem)] [číslo kurtu] [od kdy(ve formátu xx:00)][do kdy (ve formátu xx:00)]\n"+
+                "\n"+
         "Ukončení rezervace:\n"+
         "6/endres -- spočítá kolik je třeba zaplatit za daný kurt, uživatel doplní parametry\n"+
         "6/endres [rezervující(ve tvaru jmeno.prijmeni)] [den (textem)] [od kdy (ve formátu xx:00)]\n"+
         "\n"+
         "Vypsání, co je volné:\n"+
-        "7/free\n"+
-        "7/free\n"+
+        "7/free -- \n"+
+        "7/free -- \n"+
         "Přepnutí týdne:\n"+
-        "8/switch\n"+
+        "8/switch -- přepne z aktuálního týdne(current) na následující týden(next) a naopak\n"+
         "Ukončení programu:\n"+
         "exit -- ukončí program a uloží data do souborů");
 

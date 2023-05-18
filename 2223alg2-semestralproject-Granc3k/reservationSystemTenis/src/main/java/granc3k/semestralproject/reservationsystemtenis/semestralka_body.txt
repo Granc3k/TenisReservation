@@ -2,7 +2,7 @@ Menu, které umožní opakovaný výběr funkcí aplikácie a ukončení aplikac
 Víceúrovňové menu - zobrazovat vždy jenom zrovna dostupné  volby                                                    DONE
 Přehledný výpis výsledků na konzoli - použijte alespoň jednou String.format() a StringBuilder                       DONE
 Načítání vstupních dat z minimálně dvou souborů                                                                     DONE
-Zápis nových výstupních dat do souboru                                                                              částečně DONE
+Zápis nových výstupních dat do souboru                                                                              DONE
 Možnost výběru práce s textovými nebo binárními soubory (načítání i výpis)                                          TODO
 Kontrolní program pro výpis binárního souboru                                                                       TODO
 Ideálně využití reálných otevřených dat                                                                             DONE

@@ -101,12 +101,12 @@ public class Main {
                     case "debug" -> debug=!debug;
                     default -> System.out.println("Zadal jste něco špatně!");
                 }
-                System.out.println();//prints out empty line
             } catch (Exception e) {
                 if(debug){e.printStackTrace();}  //debug
                 System.err.println("Něco se pokazilo...\n"+
                                     "zkuste to znovu");
             }
+            System.out.println();//prints out empty line
         }
 
     }
