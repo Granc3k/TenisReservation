@@ -224,29 +224,25 @@ public class Commands {
         "\n"+
         "Výpis rezervací:\n"+
         "\n"+
-        "4/list dnes/today/t -- vypíše rezervace zákazníka, uživatel doplní parametry\n"+
-        "4/list dnes/today/t [rezervující(ve tvaru jmeno.prijmeni)]\n"+
-        "4/list tyden/week/w -- vypíše rezervace zákazníka na týden, uživatel doplní parametry\n"+
-        "4/list tyden/week/w [rezervující(ve tvaru jmeno.prijmeni)]\n"+
-        "4/list den/day/d -- vypíše rezervace zákazníka v určitý den, uživatel doplní parametry\n"+
-        "4/list den/day/d [rezervující(ve tvaru jmeno.prijmeni)][den (textem)]\n"+
+        "4/list + [dále doplněný parametr] -- vypíše rezervace zákazníka v daném časovém úseku, uživatel doplní parametry\n"+
         "\n"+
         "Je rezervován tento termín:\n"+
         "5/isres -- vypíše zda je místo volné v zadaném čase, či kolizi v určitých časech, uživatel doplní parametry\n"+
         "5/isres [den (textem)] [číslo kurtu] [od kdy(ve formátu xx:00)][do kdy (ve formátu xx:00)]\n"+
-                "\n"+
+        "\n"+
         "Ukončení rezervace:\n"+
         "6/endres -- spočítá kolik je třeba zaplatit za daný kurt, uživatel doplní parametry\n"+
         "6/endres [rezervující(ve tvaru jmeno.prijmeni)] [den (textem)] [od kdy (ve formátu xx:00)]\n"+
         "\n"+
         "Vypsání, co je volné:\n"+
-        "7/free -- \n"+
-        "7/free -- \n"+
+        "7/free + [dále doplněný parametr] -- vypíše volné časy v daném časovém úseku\n"+
         "Přepnutí týdne:\n"+
         "8/switch -- přepne z aktuálního týdne(current) na následující týden(next) a naopak\n"+
+        "\n"+
         "Ukončení programu:\n"+
-        "exit -- ukončí program a uloží data do souborů");
+        "exit -- ukončí program a uloží data do souborů\n"+
+        "\n"+
+        "debug -- pro vypisování treacu chyby\n");
 
     }
-    //TODO bod 6,7,8
 }
