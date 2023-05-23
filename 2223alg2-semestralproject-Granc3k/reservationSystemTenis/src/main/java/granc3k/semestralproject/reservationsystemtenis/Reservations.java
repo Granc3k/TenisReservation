@@ -6,6 +6,8 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.Scanner;
 public class Reservations {
     //price for one court for one hour
@@ -79,9 +81,9 @@ public class Reservations {
         System.out.println("Kurt:");
         int court = sc.nextInt();
         System.out.println("Od kdy:");
-        int start = whichDay(sc.next());
+        int start = hours(sc.next());
         System.out.println("Do kdy:");
-        int end = whichDay(sc.next());
+        int end = hours(sc.next());
         return isRes(day,court,start,end);
     }
     /**
@@ -339,32 +341,25 @@ public class Reservations {
      * (for example param is monday; return is 1)
      */
     public static int whichDay(String a) {
-        return switch (a) {
-            case "pondeli", "pondělí", "Pondělí", "Pondeli", "1","monday"-> 1;
-            case "utery", "úterý", "Úterý", "Utery", "2","tuesday" -> 2;
-            case "streda", "středa", "Středa", "Streda", "3","wednesday" -> 3;
-            case "ctvrtek", "čtvrtek", "Ctvrtek", "Čtvrtek", "4","thursday" -> 4;
-            case "patek", "pátek", "Pátek", "Patek", "5","friday" ->5;
-            case "sobota", "Sobota", "6", "saturday" -> 6;
-            case "nedele", "neděle", "Neděle", "Nedele", "7", "sunday" ->7;
-            default -> throw new IllegalStateException("Neočekávaná hodnota: " + a);
-        };
+        Optional<WeekDay> weekDay = Arrays.stream(WeekDay.values())
+                .filter(day -> day.getAliases().contains(a))
+                .findFirst();
+
+        if (!weekDay.isPresent()) {
+            throw new IllegalArgumentException("Zadaný parametr nebyl nalezen");
+        }
+        return weekDay.get().getId();
     }
     /**
      * takes day in int form and translates it to String form
      * (for example param is 1; return is ponděli)
      */
-    public static String whichDay(int a) {
-        return switch (a) {
-            case 1 -> "pondeli";
-            case 2 -> "utery";
-            case 3 -> "streda";
-            case 4 -> "ctvrtek";
-            case 5 -> "patek";
-            case 6 -> "sobota";
-            case 7 -> "nedele";
-            default -> throw new IllegalStateException("Neočekávaná hodnota: " + a);
-        };
+    public static String whichDay(int id){
+        Optional<WeekDay> fromId = Arrays.stream(WeekDay.values())
+                .filter(weekDay -> weekDay.getId() == id)
+                .findFirst();
+
+        return fromId.isPresent() ? fromId.get().getAliases().get(0) : "";
     }
     /**
      * takes time in String form and translates it to int form

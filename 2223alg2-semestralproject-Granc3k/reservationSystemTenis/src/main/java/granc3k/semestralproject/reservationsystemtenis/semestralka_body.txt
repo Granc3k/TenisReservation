@@ -14,9 +14,9 @@ app – třídy, tvořící logiku a práci s daty - modely, kontrolery         
 utils – pomocné třídy např. vlastní výjimky, vlastní rozhraní                                                       DONE
 Programování vůči rozhraní a použití vlastního rozhraní                                                             DONE
 Použití java.time API pro práci s časem                                                                             DONE
-Použít enum typ                                                                                                     TODO
+Použít enum typ                                                                                                     DONE
 Použití kontejnerové třídy jazyka Java (ArrayList, LinkedList, HashMap ...) z Collections frameworku.               DONE
-Alespoň dvě možnosti třídění s využitím rozhraní Comparable a Comparator                                            TODO
+Alespoň dvě možnosti třídění s využitím rozhraní Comparable a Comparator                                            TODO idk nevim kde udělat
 Použití regulárního výrazu                                                                                          DONE
 Ošetření vstupů, aby chybné vstupy nezpůsobily pád programu - pomocí existujících a vlastních výjimek               DONE
 Vhodné ošetření povinně ošetřovaných výjimek                                                                        SERU
