@@ -208,7 +208,7 @@ public class Reservations {
                 break;
             }
         }
-        System.out.println(vypis);;
+        System.out.println(vypis);
     }
     /**
      * prints out reservations of specific customer for this week via input
@@ -324,7 +324,7 @@ public class Reservations {
      * prints out what time is free in this week
      */
     public void whatIsFreeWeek(){
-        String vypis;
+        String vypis = "";
         for(int i = 0; i<reservedTimes.length;i++){
             for(int j =0;j<reservedTimes[i].length;j++){
                 vypis = "V +"+whichDay(i)+"je volno na kurtu číslo: "+j+1+"v tyto časy: ";
@@ -334,6 +334,7 @@ public class Reservations {
                     }
                 }
             }
+            System.out.println(vypis);
         }
     }
     /**
@@ -346,7 +347,7 @@ public class Reservations {
                 .findFirst();
 
         if (!weekDay.isPresent()) {
-            throw new IllegalArgumentException("Zadaný parametr nebyl nalezen");
+            throw new IllegalArgumentException("Den nebyl nalezen");
         }
         return weekDay.get().getId();
     }
