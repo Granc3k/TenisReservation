@@ -16,6 +16,12 @@ public class Main {
      * calls other files and methods in them
      */
     public static void main(String[] args) throws IOException {
+
+
+        //zelená šipka nahoře pro spuštění
+
+
+
         //vars for code
         String command;
         boolean end = false;
@@ -79,9 +85,18 @@ public class Main {
                                 "tyden -- pro výpis týdne");
                         String decision = sc.next();
                         switch (decision) {
-                            case "tyden", "week", "w" -> Commands.whatIsFreeWeek(reservations, parts);
-                            case "den", "day", "d" -> Commands.whatIsFreeDay(reservations, parts);
-                            case "dnes", "today", "t" -> Commands.whatIsFreeToday(reservations);
+                            case "tyden", "week", "w" -> {
+                                //System.out.println("Dolaďuje se :)");
+                                Commands.whatIsFreeWeek(reservations, parts);
+                                }
+                            case "den", "day", "d" -> {
+                                //System.out.println("Dolaďuje se :)");
+                                Commands.whatIsFreeDay(reservations, parts);
+                            }
+                            case "dnes", "today", "t" -> {
+                                //System.out.println("Dolaďuje se :)");
+                                Commands.whatIsFreeToday(reservations);
+                            }
                         }
                     }
                     case "switch","8" ->{

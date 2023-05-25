@@ -228,7 +228,7 @@ public class Reservations {
             String vypis = "";
             if(customer.equals(temp.getCus())){
                 vypsalo=true;
-                vypis="Kurt číslo: "+temp.getCourt()+"; v: "+whichDay(temp.getDay())+"; od: "+hours(temp.getStart())+"do: "+hours(temp.getEnd());
+                vypis="Kurt číslo: "+temp.getCourt()+" ; v: "+whichDay(temp.getDay())+" ; od: "+hours(temp.getStart())+" do: "+hours(temp.getEnd());
             }
             System.out.println(vypis);
         }
@@ -256,7 +256,7 @@ public class Reservations {
             String vypis = "";
             if(customer.equals(temp.getCus()) && temp.getDay()==day){
                 vypsalo=true;
-                vypis="Kurt číslo: "+temp.getCourt()+"; od: "+hours(temp.getStart())+"do: "+hours(temp.getEnd());
+                vypis="Kurt číslo: "+temp.getCourt()+" ; od: "+hours(temp.getStart())+" do: "+hours(temp.getEnd());
             }
             System.out.println(vypis);
         }
@@ -282,7 +282,7 @@ public class Reservations {
             LocalDateTime day = LocalDateTime.now();
             if(customer.equals(temp.getCus()) && temp.getDay()==day.getDayOfWeek().getValue()){
                 vypsalo=true;
-                vypis="Kurt číslo: "+temp.getCourt()+"; od: "+hours(temp.getStart())+"do: "+hours(temp.getEnd());
+                vypis="Kurt číslo: "+temp.getCourt()+" ; od: "+hours(temp.getStart())+" do: "+hours(temp.getEnd());
             }
             System.out.println(vypis);
         }
@@ -312,10 +312,10 @@ public class Reservations {
     public void whatIsFreeDay(int day){
         String vypis;
         for(int i = 0 ; i< reservedTimes[day-1].length;i++){
-            vypis = "V +"+whichDay(day)+"je volno na kurtu číslo: "+i+1+"v tyto časy: ";
+            vypis = "V "+whichDay(day)+" je volno na kurtu číslo "+(i+1)+" v tyto časy: ";
             for(int j =0;j<24;j++){
                 if (!reservedTimes[day-1][i].isReserved(j)){
-                    vypis+=whichDay(j)+", ";
+                    vypis+=hours(j)+", ";
                 }
             }
             System.out.println(vypis);
@@ -327,15 +327,15 @@ public class Reservations {
     public void whatIsFreeWeek(){
         String vypis = "";
         for(int i = 0; i<reservedTimes.length;i++){
-            for(int j =0;j<reservedTimes[i].length;j++){
-                vypis = "V +"+whichDay(i)+"je volno na kurtu číslo: "+j+1+"v tyto časy: ";
+            for(int j=0;j<reservedTimes[i].length;j++){
+                vypis = "V "+whichDay(i+1)+" je volno na kurtu číslo "+(j+1)+" v tyto časy: ";
                 for (int k = 0;k<24;k++){
                     if (!reservedTimes[i][j].isReserved(k)){
-                        vypis+=whichDay(k)+", ";
+                        vypis+=hours(k)+", ";
                     }
                 }
+                System.out.println(vypis);
             }
-            System.out.println(vypis);
         }
     }
     /**
