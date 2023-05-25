@@ -19,7 +19,7 @@ Použití kontejnerové třídy jazyka Java (ArrayList, LinkedList, HashMap ...)
 Alespoň dvě možnosti třídění s využitím rozhraní Comparable a Comparator                                            TODO idk nevim kde udělat
 Použití regulárního výrazu                                                                                          DONE
 Ošetření vstupů, aby chybné vstupy nezpůsobily pád programu - pomocí existujících a vlastních výjimek               DONE
-Vhodné ošetření povinně ošetřovaných výjimek                                                                        SERU
+Vhodné ošetření povinně ošetřovaných výjimek                                                                        DONE
 Použití Vámi vybrané externí knihovny (audio, posílání emailů, práce s obrázkem, junit testování, jiné formáty uložení dat ...)   DONE
 Javadoc - každá třída a metoda musí mít javadoc popis, abyste mohli na závěr vygenerovat javadoc dokumentaci        DONE
 Vhodné hlášky pro uživatele nebo Help, aby mohl aplikaci otestovat i ten, kdo ji netvořil                           DONE

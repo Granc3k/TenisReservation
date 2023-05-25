@@ -17,7 +17,6 @@ public class Reservations {
     //2D array with objects of time
     private final Times[][] reservedTimes;
     public static Scanner sc = new Scanner(System.in);
-
     /**
      * constructor for Reservations object
      */
@@ -26,7 +25,6 @@ public class Reservations {
         this.reservedTimes = new Times[7][6];//7 days in week and 6 courts
         fillTimes();
     }
-
     /**
      * fills 2D array of object Times with -1
      */
