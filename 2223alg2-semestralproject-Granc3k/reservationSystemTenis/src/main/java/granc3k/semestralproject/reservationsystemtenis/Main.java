@@ -1,6 +1,5 @@
 package granc3k.semestralproject.reservationsystemtenis;
 
-import granc3k.semestralproject.reservationsystemtenis.utils.Music;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -24,13 +23,6 @@ public class Main {
         boolean switchedWeeks = false;
         String prompt = "current_"+thisWeek;
         boolean debug = false;
-
-        //music to background
-        System.out.println("Chcete pustit hudbičku ke kódu?? a/n");
-        String dec = sc.next();
-        if(dec.equals("a")) {
-            Music.play("npc_move.wav", 1F);
-        }
 
         //used for switching between codes
         Reservations reservations = reservations_current;
