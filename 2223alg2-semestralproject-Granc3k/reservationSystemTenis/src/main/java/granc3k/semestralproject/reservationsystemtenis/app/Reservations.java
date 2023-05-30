@@ -20,6 +20,18 @@ public class Reservations {
     //2D array with objects of time
     private final Times[][] reservedTimes;
     public static Scanner sc = new Scanner(System.in);
+    /*
+    //TODO zkusit udělat pro všechny inputy
+    public String inputCus(){
+        System.out.println("Rezervující: ");
+        String customer;
+        try{
+            customer = sc.next();
+        }catch(Exception e){
+            System.err.println("Jméno zákazníka bylo nzadáno špatně!!");
+        }
+        return customer;
+    }*/
     /**
      * constructor for Reservations object
      */

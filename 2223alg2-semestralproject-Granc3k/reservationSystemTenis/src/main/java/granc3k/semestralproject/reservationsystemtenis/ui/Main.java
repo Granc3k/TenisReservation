@@ -114,6 +114,11 @@ public class Main {
                             prompt="next_"+nextWeek;
                         }
                     }
+                    case "save" ->{
+                        reservations_current.saveToFile(thisWeek);
+                        reservations_next.saveToFile(nextWeek);
+                        System.out.println("Data byla uložena do .json");
+                    }
                     case "exit" -> {
                         System.out.println("Zavírám program a ukládám data");
                         reservations_current.saveToFile(thisWeek);
