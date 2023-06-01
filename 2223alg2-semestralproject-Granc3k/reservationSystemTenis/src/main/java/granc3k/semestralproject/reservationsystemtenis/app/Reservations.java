@@ -52,7 +52,11 @@ public class Reservations {
             System.out.println("Počet hráčů: ");
             try {
                 players = sc.nextInt();
-                in = true;
+                if(players>0){
+                    in = true;
+                }else{
+                    System.err.println("Počet hráčů byl zadán špatně !!!\n");
+                }
             } catch (Exception e) {
                 System.err.println("Počet hráčů byl zadán špatně !!!\n");
             }

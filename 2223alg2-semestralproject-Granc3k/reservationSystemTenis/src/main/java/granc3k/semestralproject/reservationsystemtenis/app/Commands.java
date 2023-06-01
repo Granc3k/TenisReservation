@@ -101,7 +101,6 @@ public class Commands {
             System.out.println("Tento čas je volný");
         }
     }
-
     /**
      * ends reservation and prints out amount of money to pay
      * @param a is a parameter of type object that you work with

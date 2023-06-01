@@ -1,6 +1,6 @@
 package granc3k.semestralproject.reservationsystemtenis.ui;
-import granc3k.semestralproject.reservationsystemtenis.app.Commands;
-import granc3k.semestralproject.reservationsystemtenis.app.Reservations;
+import granc3k.semestralproject.reservationsystemtenis.app.*;
+import granc3k.semestralproject.reservationsystemtenis.utils.*;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -25,7 +25,6 @@ public class Main {
         boolean loaded = false;
 
         while(!loaded) {
-
             //choose load
             System.out.println("Jak chcete načíst soubory: bin/json");
             String dec = sc.next();
@@ -41,6 +40,13 @@ public class Main {
                 default -> System.out.println("Zadal si něco špatně\n" +
                                                 "zkus to znovu!!\n");
             }
+        }
+
+        //music to background
+        System.out.println("Chcete pustit hudbičku ke kódu?? a/n");
+        String dec = sc.next();
+        if(dec.equals("a")) {
+            Music.play("npc_move.wav", 0.5F);
         }
 
         //used for switching between variables
@@ -109,9 +115,9 @@ public class Main {
                     }
                     case "save" ->{
                         System.out.println("Jak chcete uožit data: bin/json");
-                        String dec = sc.next();
+                        String in = sc.next();
 
-                        switch(dec){
+                        switch(in){
                             case "bin"->{
                                 reservations_current.saveToBin(thisWeek);
                                 reservations_next.saveToBin(nextWeek);
@@ -141,8 +147,12 @@ public class Main {
         }
 
     }
+    /**
+     * prints out menu
+     */
     public static void vypisMenu(){
-        System.out.println("Rezervační systém pro Tenisové kurty:\n"+
+        System.out.println("------Rezervační systém pro Tenisové kurty------\n"+
+        "\n"+
         "1 - pro vytvoření reservations\n"+
         "2 - pro editaci reservations\n"+
         "3 - pro odstranění reservations\n"+
@@ -151,10 +161,13 @@ public class Main {
         "6 - pro výpis ceny pro zaplacení reservations\n"+
         "7 - pro výpis volných časů\n"+
         "8 - pro přepnutí aktuálního týdne s následujícím\n"+
+        "save - pro uložení do souborů\n"+
         "help - pro pomoc se zadáváním hodnot, nebo příkazů\n"+
         "exit - pro vypnutí programu");
     }
-
+    /**
+     * loads data to variables from json
+     */
     public static void loadJson(Reservations reservations_current, Reservations reservations_next, int thisWeek, int nextWeek) throws IOException{
         System.out.println("Načítám data z .json souborů");
         //loading from files
@@ -171,7 +184,9 @@ public class Main {
             System.err.println("Nepodařilo se načíst soubor následujícího týdne...");
         }
     }
-
+    /**
+     * loads data to variables from binary files
+     */
     public static void loadBin(Reservations reservations_current, Reservations reservations_next, int thisWeek, int nextWeek) throws IOException{
         System.out.println("Načítám data z binárních souborů");
         //loading from files
