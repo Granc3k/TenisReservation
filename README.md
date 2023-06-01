@@ -44,7 +44,7 @@ Veškeré příkazy budou u finální verze programy napsány v commandu help, �
 Externí knihovna pro ukládání dat do .json přes knihovnu GSON.
 
 ### **Čtení a načítání JSON souborů**
-**Data v objektu v Javě:**<br />
+**Data v objektu třídy Reservation v projektu:**<br />
 customer=kokos.padavy<br />
 players=69<br />
 day=2<br />
