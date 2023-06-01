@@ -135,6 +135,7 @@ public class Reservations {
             Reservation temp = reservationList.get(i);
             if(start == temp.getStart() && day == temp.getDay() && court == temp.getCourt() && customer.equals(temp.getCus())){
                 wasFound=true;
+                reservedTimes[day-1][court-1].remTimes(start,customer);
                 int decision = editMenu();
                 switch(decision){
                     case 1 -> temp.editCus();
@@ -146,6 +147,7 @@ public class Reservations {
                 }
             }
             reservationList.set(i,temp);
+            reservedTimes[temp.getDay()-1][temp.getCourt()-1].setTimes(temp.getStart(),temp.getEnd(),temp.getCus());
             System.out.println("Rezervace byla upravena");
             break;
         }
