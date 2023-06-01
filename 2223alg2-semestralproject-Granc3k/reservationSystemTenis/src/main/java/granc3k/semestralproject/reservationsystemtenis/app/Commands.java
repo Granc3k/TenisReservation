@@ -242,6 +242,7 @@ public class Commands {
         "Ukončení programu:\n"+
         "exit -- ukončí program a uloží data do souborů\n"+
         "\n"+
+        "save -- uložení do souborů\n"+
         "debug -- pro vypisování tracu chyby\n");
 
     }

@@ -3,8 +3,8 @@ Víceúrovňové menu - zobrazovat vždy jenom zrovna dostupné  volby          
 Přehledný výpis výsledků na konzoli - použijte alespoň jednou String.format() a StringBuilder                       DONE
 Načítání vstupních dat z minimálně dvou souborů                                                                     DONE
 Zápis nových výstupních dat do souboru                                                                              DONE
-Možnost výběru práce s textovými nebo binárními soubory (načítání i výpis)                                          TODO
-Kontrolní program pro výpis binárního souboru                                                                       TODO
+Možnost výběru práce s textovými nebo binárními soubory (načítání i výpis)                                          DONE
+Kontrolní program pro výpis binárního souboru                                                                       DONE
 Ideálně využití reálných otevřených dat                                                                             DONE
 Adresář data (na rovnaké úrovni jako src) se všemi datovými soubory a případně třídu Datastore se statickými metodami, které budou poskytovat další statická data   DONE
 Nastavení cesty k adresáři data uživatelem na začátku programu, nebo v konfiguračním souboru                        DONE (v souboru)

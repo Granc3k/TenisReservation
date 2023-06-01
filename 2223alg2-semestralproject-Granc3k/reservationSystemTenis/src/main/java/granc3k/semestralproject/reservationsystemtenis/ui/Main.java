@@ -1,13 +1,9 @@
 package granc3k.semestralproject.reservationsystemtenis.ui;
-
-
 import granc3k.semestralproject.reservationsystemtenis.app.Commands;
 import granc3k.semestralproject.reservationsystemtenis.app.Reservations;
-
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.Scanner;
-
 public class Main {
     public static Scanner sc = new Scanner(System.in);
     /**
@@ -16,42 +12,39 @@ public class Main {
      * calls other files and methods in them
      */
     public static void main(String[] args) throws IOException {
-
-
-        //zelená šipka nahoře pro spuštění
-
-
-
         //vars for code
         String command;
         boolean end = false;
-
         Reservations reservations_current = new Reservations();
         Reservations reservations_next = new Reservations();
-
         int thisWeek = LocalDateTime.now().getDayOfYear()/7 ;
         int nextWeek = (LocalDateTime.now().getDayOfYear()/7)+1;
-
         boolean switchedWeeks = false;
         String prompt = "current_"+thisWeek;
         boolean debug = false;
+        boolean loaded = false;
 
-        //used for switching between codes
+        while(!loaded) {
+
+            //choose load
+            System.out.println("Jak chcete načíst soubory: bin/json");
+            String dec = sc.next();
+            switch (dec) {
+                case "json" -> {
+                    loadJson(reservations_current, reservations_next, thisWeek, nextWeek);
+                    loaded = true;
+                }
+                case "bin" -> {
+                    loadBin(reservations_current, reservations_next, thisWeek, nextWeek);
+                    loaded = true;
+                }
+                default -> System.out.println("Zadal si něco špatně\n" +
+                                                "zkus to znovu!!\n");
+            }
+        }
+
+        //used for switching between variables
         Reservations reservations = reservations_current;
-
-        //loading from files
-        try{
-            reservations_current.loadFromFile(thisWeek);
-        }catch (Exception e){
-            //e.printStackTrace();  //for debug
-            System.err.println("Nepodařilo se načíst soubor aktuálního týdne...");
-        }
-        try{
-            reservations_next.loadFromFile(nextWeek);
-        }catch (Exception e){
-            //e.printStackTrace();  //for debug
-            System.err.println("Nepodařilo se načíst soubor následujícího týdne...");
-        }
 
         //main code
         System.out.println("Spouštím rezervační systém");
@@ -115,9 +108,20 @@ public class Main {
                         }
                     }
                     case "save" ->{
-                        reservations_current.saveToFile(thisWeek);
-                        reservations_next.saveToFile(nextWeek);
-                        System.out.println("Data byla uložena do .json");
+                        System.out.println("Jak chcete uožit data: bin/json");
+                        String dec = sc.next();
+
+                        switch(dec){
+                            case "bin"->{
+                                reservations_current.saveToBin(thisWeek);
+                                reservations_next.saveToBin(nextWeek);
+                                System.out.println("Data byla uložena do binárního souboru");
+                            } case "json"->{
+                                reservations_current.saveToFile(thisWeek);
+                                reservations_next.saveToFile(nextWeek);
+                                System.out.println("Data byla uložena do .json");
+                            }default -> System.out.println("Zadali jste něco špatně...");
+                        }
                     }
                     case "exit" -> {
                         System.out.println("Zavírám program a ukládám data");
@@ -149,5 +153,39 @@ public class Main {
         "8 - pro přepnutí aktuálního týdne s následujícím\n"+
         "help - pro pomoc se zadáváním hodnot, nebo příkazů\n"+
         "exit - pro vypnutí programu");
+    }
+
+    public static void loadJson(Reservations reservations_current, Reservations reservations_next, int thisWeek, int nextWeek) throws IOException{
+        System.out.println("Načítám data z .json souborů");
+        //loading from files
+        try{
+            reservations_current.loadFromFile(thisWeek);
+        }catch (Exception e){
+            //e.printStackTrace();  //for debug
+            System.err.println("Nepodařilo se načíst soubor aktuálního týdne...");
+        }
+        try{
+            reservations_next.loadFromFile(nextWeek);
+        }catch (Exception e){
+            //e.printStackTrace();  //for debug
+            System.err.println("Nepodařilo se načíst soubor následujícího týdne...");
+        }
+    }
+
+    public static void loadBin(Reservations reservations_current, Reservations reservations_next, int thisWeek, int nextWeek) throws IOException{
+        System.out.println("Načítám data z binárních souborů");
+        //loading from files
+        try{
+            reservations_current.loadFromBin(thisWeek);
+        }catch (Exception e){
+            //e.printStackTrace();  //for debug
+            System.err.println("Nepodařilo se načíst soubor aktuálního týdne...");
+        }
+        try{
+            reservations_next.loadFromBin(nextWeek);
+        }catch (Exception e){
+            //e.printStackTrace();  //for debug
+            System.err.println("Nepodařilo se načíst soubor následujícího týdne...");
+        }
     }
 }

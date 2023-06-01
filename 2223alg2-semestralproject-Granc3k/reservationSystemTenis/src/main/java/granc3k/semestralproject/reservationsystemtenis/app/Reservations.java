@@ -5,13 +5,15 @@ import com.google.gson.reflect.TypeToken;
 import granc3k.semestralproject.reservationsystemtenis.utils.Reservation;
 import granc3k.semestralproject.reservationsystemtenis.utils.Times;
 import granc3k.semestralproject.reservationsystemtenis.utils.WeekDay;
-
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Reservations {
     //price for one court for one hour
     static final int cena = 300;
@@ -20,18 +22,141 @@ public class Reservations {
     //2D array with objects of time
     private final Times[][] reservedTimes;
     public static Scanner sc = new Scanner(System.in);
-    /*
-    //TODO zkusit udělat pro všechny inputy
+
+    //inputs
+
+    /**
+     * input of customer
+     */
     public String inputCus(){
-        System.out.println("Rezervující: ");
-        String customer;
-        try{
-            customer = sc.next();
-        }catch(Exception e){
-            System.err.println("Jméno zákazníka bylo nzadáno špatně!!");
+        String customer="";
+        boolean in = false;
+        while(!in) {
+            System.out.println("Rezervující: ");
+            try {
+                customer = sc.next();
+                in = true;
+            } catch (Exception e) {
+                System.err.println("Jméno zákazníka bylo zadáno špatně !!!\n");
+            }
         }
         return customer;
-    }*/
+    }
+    /**
+     * input of players
+     */
+    public int inputPlayers(){
+        int players=0;
+        boolean in = false;
+        while(!in) {
+            System.out.println("Počet hráčů: ");
+            try {
+                players = sc.nextInt();
+                in = true;
+            } catch (Exception e) {
+                System.err.println("Počet hráčů byl zadán špatně !!!\n");
+            }
+        }
+        return players;
+    }
+    /**
+     * input of day
+     */
+    public int inputDay(){
+        String input;
+        int day=0;
+        boolean in = false;
+        while(!in) {
+            System.out.println("Zadejte den v týdnu: ");
+            try {
+                input = sc.next();
+                day = whichDay(input);
+                in = true;
+            } catch (Exception e) {
+                System.err.println("Den byl zadán špatně !!!\n");
+            }
+        }
+        return day;
+    }
+    /**
+     * input of court number
+     */
+    public int inputCourt(){
+        int court = 0;
+        boolean in = false;
+        while(!in) {
+            System.out.println("Číslo kurtu: ");
+            try {
+                court = sc.nextInt();
+                if(court<7 && court>0){
+                    in = true;
+                }else{
+                    System.err.println("Číslo kurtu bylo zadáno špatně !!!\n");
+                }
+            } catch (Exception e) {
+                System.err.println("Číslo kurtu bylo zadáno špatně !!!\n");
+            }
+        }
+        return court;
+    }
+    /**
+     * inputs start time
+     */
+    public int inputStart(){
+        String input = "";
+        int start = 0;
+        boolean in = false;
+        while(!in) {
+            System.out.println("Od kolika: ");
+            try {
+                input = sc.next();
+                if(validateTime(input)){
+                    start = hours(input);
+                    in = true;
+                }else{
+                    System.err.println("Čas byl zadán špatně !!!\n");
+                }
+            } catch (Exception e) {
+                System.err.println("Čas byl zadán špatně !!!\n");
+            }
+        }
+        return start;
+    }
+    /**
+     * inputs end time
+     */
+    public int inputEnd(){
+        String input = "";
+        int end = 0;
+        boolean in = false;
+        while(!in) {
+            System.out.println("Do kolika: ");
+            try {
+                input = sc.next();
+                if(validateTime(input)){
+                    end = hours(input);
+                    in = true;
+                }else{
+                    System.err.println("Čas byl zadán špatně !!!\n");
+                }
+            } catch (Exception e) {
+                System.err.println("Čas byl zadán špatně !!!\n");
+            }
+        }
+        return end;
+    }
+    /**
+     * validates if time is in format XX:XX
+     */
+    public boolean validateTime(String time){
+        String regex = "\\d{2}:\\d{2}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(time);
+        return matcher.matches();
+    }
+
+    //main methods
+
     /**
      * constructor for Reservations object
      */
@@ -54,24 +179,12 @@ public class Reservations {
      * makes reservation via input
      */
     public void makeRes() {
-        System.out.println("Rezervující: ");
-        String customer = sc.next();
-
-        System.out.println("Počet hráčů: ");
-        int players = sc.nextInt();
-
-        System.out.println("Jaký den: ");
-        int day = whichDay(sc.next());
-
-        System.out.println("Kurt: ");
-        int court = sc.nextInt();
-
-        System.out.println("Od kdy:");
-        int start = hours(sc.next());
-
-        System.out.println("Do kdy:");
-        int end = hours(sc.next());
-
+        String customer = inputCus();
+        int players = inputPlayers();
+        int day = inputDay();
+        int court = inputCourt();
+        int start = inputStart();
+        int end = inputEnd();
         makeRes(customer, players, day, court, start, end);
     }
     /**
@@ -89,14 +202,10 @@ public class Reservations {
      * checks if the specific time is free via input
      */
     public boolean isRes(){
-        System.out.println("Den:");
-        int day = whichDay(sc.next());
-        System.out.println("Kurt:");
-        int court = sc.nextInt();
-        System.out.println("Od kdy:");
-        int start = hours(sc.next());
-        System.out.println("Do kdy:");
-        int end = hours(sc.next());
+        int day = inputDay();
+        int court = inputCourt();
+        int start = inputStart();
+        int end = inputEnd();
         return isRes(day,court,start,end);
     }
     /**
@@ -120,17 +229,10 @@ public class Reservations {
      * removes reservation via input
      */
     public void removeReservation(){
-        System.out.println("Rezervující: ");
-        String customer = sc.next();
-
-        System.out.println("Jaký den: ");
-        int day = whichDay(sc.next());
-
-        System.out.println("Kurt: ");
-        int court = sc.nextInt();
-
-        System.out.println("Od kdy: ");
-        int start = hours(sc.next());
+        String customer = inputCus();
+        int day = inputDay();
+        int court = inputCourt();
+        int start = inputStart();
 
         removeReservation(customer,day,court,start);
     }
@@ -147,14 +249,10 @@ public class Reservations {
      * edits reservation via input
      */
     public void editReservation(){
-        System.out.println("Jméno rezervujícího: ");
-        String customer = sc.next();
-        System.out.println("Jaký den: ");
-        int day = whichDay(sc.next());
-        System.out.println("Kurt: ");
-        int court = sc.nextInt();
-        System.out.println("Od kdy:");
-        int start = hours(sc.next());
+        String customer = inputCus();
+        int day = inputDay();
+        int court = inputCourt();
+        int start = inputStart();
         editReservation(customer,day,court,start);
     }
     /**
@@ -202,12 +300,9 @@ public class Reservations {
      * prints out amount that needs to be paid via input
      */
     public void endReservation(){
-        System.out.println("Rezervující:");
-        String customer = sc.next();
-        System.out.println("Den:");
-        int day = whichDay(sc.next());
-        System.out.println("Od kdy:");
-        int start = hours(sc.next());
+        String customer = inputCus();
+        int day = inputDay();
+        int start = inputStart();
         endReservation(customer,day,start);
     }
     /**
@@ -227,8 +322,7 @@ public class Reservations {
      * prints out reservations of specific customer for this week via input
      */
     public void allCustomerReservationsForWeek(){
-        System.out.println("Zadejte jméno rezervujícího:");
-        String customer = sc.next();
+        String customer = inputCus();
         allCustomerReservationsForWeek(customer);
     }
     /**
@@ -252,10 +346,8 @@ public class Reservations {
      * prints out reservations of specific customer for specific day in this week via input
      */
     public void allCustomerReservationsForDay(){
-        System.out.println("Zadejte jméno rezervujícího:");
-        String customer = sc.next();
-        System.out.println("Zadejte den:");
-        int day = whichDay(sc.next());
+        String customer = inputCus();
+        int day = inputDay();
         allCustomerReservationsForDay(customer,day);
 
     }
@@ -280,8 +372,7 @@ public class Reservations {
      * prints out reservations of specific customer for today via input
      */
     public void allCustomerReservationsForToday(){
-        System.out.println("Rezervující");
-        String customer = sc.next();
+        String customer = inputCus();
         allCustomerReservationsForToday(customer);
     }
     /**
@@ -314,20 +405,19 @@ public class Reservations {
      * prints out what time is free on specific day via input
      */
     public void whatIsFreeDay(){
-        System.out.println("Den:");
-        int day = whichDay(sc.next());
+        int day = inputDay();
         whatIsFreeDay(day);
     }
     /**
      * prints out what time is free on specific day, with inputted parameters
      */
     public void whatIsFreeDay(int day){
-        String vypis;
+        StringBuilder vypis;
         for(int i = 0 ; i< reservedTimes[day-1].length;i++){
-            vypis = "V "+whichDay(day)+" je volno na kurtu číslo "+(i+1)+" v tyto časy: ";
+            vypis = new StringBuilder("V " + whichDay(day) + " je volno na kurtu číslo " + (i + 1) + " v tyto časy: ");
             for(int j =0;j<24;j++){
                 if (!reservedTimes[day-1][i].isReserved(j)){
-                    vypis+=hours(j)+", ";
+                    vypis.append(hours(j)).append(", ");
                 }
             }
             System.out.println(vypis);
@@ -337,13 +427,13 @@ public class Reservations {
      * prints out what time is free in this week
      */
     public void whatIsFreeWeek(){
-        String vypis = "";
+        StringBuilder vypis;
         for(int i = 0; i<reservedTimes.length;i++){
             for(int j=0;j<reservedTimes[i].length;j++){
-                vypis = "V "+whichDay(i+1)+" je volno na kurtu číslo "+(j+1)+" v tyto časy: ";
+                vypis = new StringBuilder("V " + whichDay(i + 1) + " je volno na kurtu číslo " + (j + 1) + " v tyto časy: ");
                 for (int k = 0;k<24;k++){
                     if (!reservedTimes[i][j].isReserved(k)){
-                        vypis+=hours(k)+", ";
+                        vypis.append(hours(k)).append(", ");
                     }
                 }
                 System.out.println(vypis);
@@ -359,7 +449,7 @@ public class Reservations {
                 .filter(day -> day.getAliases().contains(a))
                 .findFirst();
 
-        if (!weekDay.isPresent()) {
+        if (weekDay.isEmpty()) {
             throw new IllegalArgumentException("Den nebyl nalezen");
         }
         return weekDay.get().getId();
@@ -396,7 +486,7 @@ public class Reservations {
      */
     public void loadFromFile(int param) throws IOException {
         Gson gson = new Gson();
-        this.reservationList = gson.fromJson(new FileReader("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/save_"+param+".json"),  new TypeToken<ArrayList<Reservation>>(){}.getType());
+        this.reservationList = gson.fromJson(new FileReader("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/json/save_"+param+".json"),  new TypeToken<ArrayList<Reservation>>(){}.getType());
         loadTimes();
     }
     /**
@@ -414,8 +504,43 @@ public class Reservations {
     public void saveToFile(int param) throws IOException {
         Gson gson = new Gson();
         String serialized = gson.toJson(reservationList);
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/save_"+param+".json"))){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/json/save_"+param+".json"))){
             writer.write(serialized, 0, serialized.length());
+        }
+    }
+    /**
+     * saves to binary file
+     */
+    public void saveToBin(int param) throws IOException{
+        DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/bin/save_"+param+".dat", true)));
+        for(Reservation temp:reservationList){
+            dos.writeUTF(temp.getCus());
+            dos.writeInt(temp.getPla());
+            dos.writeInt(temp.getDay());
+            dos.writeInt(temp.getCourt());
+            dos.writeInt(temp.getStart());
+            dos.writeInt(temp.getEnd());
+        }
+        dos.close();
+    }
+    /**
+     * loads from binary file
+     */
+    public void loadFromBin(int param) throws IOException{
+        DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/bin/save_"+param+".dat")));
+        try {
+            while (true) {
+                String cus = dis.readUTF();
+                int players = dis.readInt();
+                int day = dis.readInt();
+                int court = dis.readInt();
+                int start = dis.readInt();
+                int end = dis.readInt();
+                Reservation temp = new Reservation(cus,players,day,court,start,end);
+                reservationList.add(temp);
+            }
+        } catch (EOFException e) {
+            //konec souboru
         }
     }
 }
