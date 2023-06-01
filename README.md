@@ -22,4 +22,4 @@ Veškeré příkazy budou u finální verze programy napsány v commandu help, �
 -Data jsou při ukončení programu zapsány do datové struktury **.json** s pomocí externí knihovny **GSON** pro Java Maven - toto bude primární datový výstup<br />
 
 ### **Class Diagram**
-![Class Diagram](./diagram.png)
+![Class Diagram](./mermaid_diagram.png)
