@@ -52,7 +52,11 @@ public class Reservations {
         int court = Inputs.inputCourt();
         int start = Inputs.inputStart();
         int end = Inputs.inputEnd();
-        makeRes(customer, players, day, court, start, end);
+        if(end<start){
+            System.err.println("Časy byly zadány špatně!!!\n");
+        }else {
+            makeRes(customer, players, day, court, start, end);
+        }
     }
     /**
      * makes reservation with inputted parameters
