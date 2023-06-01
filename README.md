@@ -52,7 +52,7 @@ court=5<br />
 startHour=14<br />
 endHour=15<br />
 
-**Data z objektu převedená do JSONu:**
+**Data z objektu převedená do JSONu:**<br />
 [{"customer":"kokos.padavy","players":69,"day":2,"court":5,"startHour":14,"endHour":15}]<br />
 
 **Následné parsování:**
