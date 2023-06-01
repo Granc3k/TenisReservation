@@ -1,0 +1,86 @@
+classDiagram
+    class Reservations {
+        - static final int cena
+        - ArrayList<Reservation> reservationList
+        - Times[][] reservedTimes
+        - Scanner sc
+        + Reservations()
+        + makeRes()
+        + makeRes(customer: String, players: int, day: int, court: int, start: int, end: int)
+        + isRes(): boolean
+        + isRes(day: int, court: int, start: int, end: int): boolean
+        + removeReservation()
+        + removeReservation(customer: String, day: int, court: int, start: int)
+        + editReservation()
+        + editReservation(customer: String, day: int, court: int, start: int)
+        + endReservation()
+        + endReservation(customer: String, day: int, start: int)
+        + allCustomerReservationsForWeek()
+        + allCustomerReservationsForWeek(customer: String)
+        + allCustomerReservationsForDay()
+        + allCustomerReservationsForDay(customer: String, day: int)
+        + allCustomerReservationsForToday()
+        + allCustomerReservationsForToday(customer: String)
+        + whatIsFreeToday()
+        + whatIsFreeDay()
+        + whatIsFreeDay(day: int)
+        + whatIsFreeWeek()
+        + loadFromFile(param: int)
+        + saveToFile(param: int)
+        + saveToBin(param: int)
+    }
+
+    class Reservation {
+        - String customer
+        - int players
+        - int day
+        - int court
+        - int start
+        - int end
+        + Reservation(customer: String, players: int, day: int, court: int, start: int, end: int)
+        + editCus()
+        + editPla()
+        + editDay()
+        + editCou()
+        + editTime()
+        + editRes()
+        + getStart(): int
+        + getDay(): int
+        + getCourt(): int
+        + getCus(): String
+        + getEnd(): int
+    }
+
+    class Times {
+        - boolean[] times
+        + Times()
+        + setTimes(start: int, end: int, customer: String)
+        + remTimes(start: int, customer: String)
+        + isReserved(time: int): boolean
+    }
+
+    class Inputs {
+        + inputCus(): String
+        + inputPlayers(): int
+        + inputDay(): int
+        + inputCourt(): int
+        + inputStart(): int
+        + inputEnd(): int
+    }
+
+    class WeekDay {
+        - int id
+        - Array<String> aliases
+        + getId(): int
+        + getAliases(): Array<String>
+    }
+
+    class Main {
+        + main(args: String[]): void
+    }
+
+    Reservations "1" --> "1..*" Reservation
+    Reservations "1" --> "1..*" Times
+    Reservation "1" --> "1" Inputs
+    Reservation "1" --> "1..*" WeekDay
+    Main --> "1" Reservations
