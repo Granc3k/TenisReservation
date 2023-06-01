@@ -410,7 +410,8 @@ public class Reservations {
                 int start = dis.readInt();
                 int end = dis.readInt();
                 Reservation temp = new Reservation(cus,players,day,court,start,end);
-                reservationList.add(temp);
+                this.reservationList.add(temp);
+                loadTimes();
             }
         } catch (EOFException e) {
             //konec souboru
