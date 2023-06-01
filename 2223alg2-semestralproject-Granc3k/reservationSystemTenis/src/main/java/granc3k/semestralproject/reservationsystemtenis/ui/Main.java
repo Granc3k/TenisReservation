@@ -133,6 +133,8 @@ public class Main {
                         System.out.println("Zavírám program a ukládám data");
                         reservations_current.saveToFile(thisWeek);
                         reservations_next.saveToFile(nextWeek);
+                        Music.play("left_the_chat.wav", 0.5F);
+                        Thread.sleep(500);
                         end = true;
                     }
                     case "debug" -> debug=!debug;

@@ -39,10 +39,15 @@ public class Inputs {
                 if(players>0){
                     in = true;
                 }else{
-                    System.err.println("Počet hráčů byl zadán špatně !!!\n");
+                    System.err.println(
+                    "Počet hráčů byl zadán špatně !!!\n"+
+                    "Zadejte kladné číslo !!!\n");
+
                 }
             } catch (Exception e) {
-                System.err.println("Počet hráčů byl zadán špatně !!!\n");
+                System.err.println(
+                "Počet hráčů byl zadán špatně !!!\n"+
+                "Zadejte kladné číslo !!!\n");
             }
         }
         return players;
@@ -55,7 +60,7 @@ public class Inputs {
         int day=0;
         boolean in = false;
         while(!in) {
-            System.out.println("Zadejte den v týdnu: ");
+            System.out.println("Zadejte den v týdnu (slovně, či číselně): ");
             try {
                 input = sc.next();
                 day = Reservations.whichDay(input);
@@ -73,7 +78,7 @@ public class Inputs {
         int court = 0;
         boolean in = false;
         while(!in) {
-            System.out.println("Číslo kurtu: ");
+            System.out.println("Číslo kurtu (1-6): ");
             try {
                 court = sc.nextInt();
                 if(court<7 && court>0){
@@ -95,7 +100,7 @@ public class Inputs {
         int start = 0;
         boolean in = false;
         while(!in) {
-            System.out.println("Od kolika: ");
+            System.out.println("Od kolika (ve tvaru **:**): ");
             try {
                 input = sc.next();
                 if(validateTime(input)){
@@ -118,7 +123,7 @@ public class Inputs {
         int end = 0;
         boolean in = false;
         while(!in) {
-            System.out.println("Do kolika: ");
+            System.out.println("Do kolika (ve tvaru **:**): ");
             try {
                 input = sc.next();
                 if(validateTime(input)){
