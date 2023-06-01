@@ -18,7 +18,7 @@ Veškeré příkazy budou u finální verze programy napsány v commandu help, �
 
 ### **Popis Struktury vstupních a výstupních souborů**
 -Je zde možnost ukládání a čtení dat z binárních souborů, či do datového typu .json<br />
--data jsou pojmenovány: "save_(číslo týdne v roce).bin/json" a jsou rozděleny do složek podle datového typu souboru<br />
+-data jsou pojmenovány: "save_(číslo týdne v roce).dat/json" a jsou rozděleny do složek podle datového typu souboru<br />
 -Data jsou při ukončení programu zapsány do datové struktury **.json** s pomocí externí knihovny **GSON** pro Java Maven - toto bude primární datový výstup<br />
 
 ### **Class Diagram**
