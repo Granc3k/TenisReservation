@@ -40,20 +40,20 @@ Veškeré příkazy budou u finální verze programy napsány v commandu help, �
 |   11  | Výpis printstacktrace, při chybě programu    | debug                             | true                                                |
 
 
-###**Použití externích knihoven**
+### **Použití externích knihoven**
 Externí knihovna pro ukládání dat do .json přes knihovnu GSON.
 
-###**Čtení a načítání JSON souborů**
-**Data v objektu v Javě:**
-customer=kokos.padavy
-players=69
-day=2
-court=5
-startHour=14
-endHour=15
+### **Čtení a načítání JSON souborů**
+**Data v objektu v Javě:**<br />
+customer=kokos.padavy<br />
+players=69<br />
+day=2<br />
+court=5<br />
+startHour=14<br />
+endHour=15<br />
 
 **Data z objektu převedená do JSONu:**
-[{"customer":"kokos.padavy","players":69,"day":2,"court":5,"startHour":14,"endHour":15}]
+[{"customer":"kokos.padavy","players":69,"day":2,"court":5,"startHour":14,"endHour":15}]<br />
 
 **Následné parsování:**
 ```java
