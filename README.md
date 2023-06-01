@@ -18,3 +18,6 @@ Veškeré příkazy budou u finální verze programy napsány v commandu help, �
 
 ### **Popis Struktury vstupních a výstupních souborů**
 -Objekty a data budou zapsány a čteny do datové struktury **.json** s pomocí externí knihovny **GSON** pro Java Maven - toto bude primární datový výstup<br />
+
+### **Class Diagram**
+![Class Diagram](./diagram.png)
