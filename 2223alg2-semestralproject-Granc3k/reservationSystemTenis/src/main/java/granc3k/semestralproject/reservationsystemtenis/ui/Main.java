@@ -42,12 +42,14 @@ public class Main {
             }
         }
 
+        /*
         //music to background
         System.out.println("Chcete pustit hudbičku ke kódu?? a/n");
         String dec = sc.next();
         if(dec.equals("a")) {
-            Music.play("npc_move.wav", 0.5F);
+            Music.play("background_music.wav", 0.5F);
         }
+        */
 
         //used for switching between variables
         Reservations reservations = reservations_current;
@@ -105,15 +107,17 @@ public class Main {
                             reservations = reservations_current;
                             switchedWeeks=false;
                             prompt="current_"+thisWeek;
+                            System.out.println("Přehazuji na práci s aktuálním týdnem :)");
                         }else {
                             //switch to next week
                             reservations_current = reservations;
                             reservations = reservations_next;
                             switchedWeeks=true;
                             prompt="next_"+nextWeek;
+                            System.out.println("Přehazuji na práci s následujícím týdnem :)");
                         }
                     }
-                    case "save" ->{
+                    case "9,save" ->{
                         System.out.println("Jak chcete uožit data: bin/json");
                         String in = sc.next();
 
@@ -163,7 +167,7 @@ public class Main {
         "6 - pro výpis ceny pro zaplacení reservations\n"+
         "7 - pro výpis volných časů\n"+
         "8 - pro přepnutí aktuálního týdne s následujícím\n"+
-        "save - pro uložení do souborů\n"+
+        "9 - pro uložení do souborů\n"+
         "help - pro pomoc se zadáváním hodnot, nebo příkazů\n"+
         "exit - pro vypnutí programu");
     }

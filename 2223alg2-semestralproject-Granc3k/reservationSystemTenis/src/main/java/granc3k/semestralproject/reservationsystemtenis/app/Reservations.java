@@ -5,13 +5,10 @@ import com.google.gson.reflect.TypeToken;
 import granc3k.semestralproject.reservationsystemtenis.utils.*;
 import java.io.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 
 
-public class Reservations {
+public class Reservations{
     //price for one court for one hour
     static final int cena = 300;
     //list with reservations
@@ -360,6 +357,7 @@ public class Reservations {
     public void loadFromFile(int param) throws IOException {
         Gson gson = new Gson();
         this.reservationList = gson.fromJson(new FileReader("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/json/save_"+param+".json"),  new TypeToken<ArrayList<Reservation>>(){}.getType());
+        sortReservationsByCustomer();
         loadTimes();
     }
     /**
@@ -375,46 +373,61 @@ public class Reservations {
      * @param param - number of week
      */
     public void saveToFile(int param) throws IOException {
+        sortReservationsByCustomer();
         Gson gson = new Gson();
         String serialized = gson.toJson(reservationList);
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/json/save_"+param+".json"))){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/json/save_" + param + ".json", false))) {
             writer.write(serialized, 0, serialized.length());
         }
     }
     /**
      * saves to binary file
      */
-    public void saveToBin(int param) throws IOException{
-        DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/bin/save_"+param+".dat", true)));
-        for(Reservation temp:reservationList){
-            dos.writeUTF(temp.getCus());
-            dos.writeInt(temp.getPla());
-            dos.writeInt(temp.getDay());
-            dos.writeInt(temp.getCourt());
-            dos.writeInt(temp.getStart());
-            dos.writeInt(temp.getEnd());
+    public void saveToBin(int param) throws IOException {
+        sortReservationsByCustomer();
+        try (DataOutputStream dos = new DataOutputStream(
+                new BufferedOutputStream(new FileOutputStream("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/bin/save_" + param + ".dat", false)))) {
+
+            if (reservationList != null) {
+                for (Reservation temp : reservationList) {
+                    dos.writeUTF(temp.getCus());
+                    dos.writeInt(temp.getPla());
+                    dos.writeInt(temp.getDay());
+                    dos.writeInt(temp.getCourt());
+                    dos.writeInt(temp.getStart());
+                    dos.writeInt(temp.getEnd());
+                }
+            }
         }
-        dos.close();
     }
     /**
      * loads from binary file
      */
-    public void loadFromBin(int param) throws IOException{
-        DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/bin/save_"+param+".dat")));
-        try {
-            while (true) {
+    public void loadFromBin(int param) throws IOException {
+        try (DataInputStream dis = new DataInputStream(
+                new BufferedInputStream(new FileInputStream("./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/bin/save_" + param + ".dat")))) {
+
+            while (dis.available() > 0) {
                 String cus = dis.readUTF();
                 int players = dis.readInt();
                 int day = dis.readInt();
                 int court = dis.readInt();
                 int start = dis.readInt();
                 int end = dis.readInt();
-                Reservation temp = new Reservation(cus,players,day,court,start,end);
+                Reservation temp = new Reservation(cus, players, day, court, start, end);
                 this.reservationList.add(temp);
-                loadTimes();
             }
-        } catch (EOFException e) {
-            //konec souboru
+            sortReservationsByCustomer();
+            loadTimes();
         }
+
+    }
+    public void sortReservationsByCustomer() {
+        reservationList.sort(new Comparator<Reservation>() {
+            @Override
+            public int compare(Reservation r1, Reservation r2) {
+                return r1.getCus().compareTo(r2.getCus());
+            }
+        });
     }
 }

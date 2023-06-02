@@ -16,10 +16,16 @@ Programování vůči rozhraní a použití vlastního rozhraní                
 Použití java.time API pro práci s časem                                                                             DONE
 Použít enum typ                                                                                                     DONE
 Použití kontejnerové třídy jazyka Java (ArrayList, LinkedList, HashMap ...) z Collections frameworku.               DONE
-Alespoň dvě možnosti třídění s využitím rozhraní Comparable a Comparator                                            TODO idk nevim, kde udělat
+Alespoň dvě možnosti třídění s využitím rozhraní Comparable a Comparator                                            DONE
 Použití regulárního výrazu                                                                                          DONE
 Ošetření vstupů, aby chybné vstupy nezpůsobily pád programu - pomocí existujících a vlastních výjimek               DONE
 Vhodné ošetření povinně ošetřovaných výjimek                                                                        DONE
 Použití Vámi vybrané externí knihovny (audio, posílání emailů, práce s obrázkem, junit testování, jiné formáty uložení dat ...)   DONE
 Javadoc - každá třída a metoda musí mít javadoc popis, abyste mohli na závěr vygenerovat javadoc dokumentaci        DONE
 Vhodné hlášky pro uživatele nebo Help, aby mohl aplikaci otestovat i ten, kdo ji netvořil                           DONE
+
+//DONE Class Diagram zmenšit(hodit jen důležité metody)
+//TODO prohlížení starých rezervací na základě datumu
+//TODO k bodu 4 v MAIN přidat projetí všechny data
+//DONE opravit bin soubor load a save
+//DONE Comparator podle jména při výpisu

@@ -127,6 +127,7 @@ public class Commands {
      * @param b is a param for parsed String used for commands
      */
     public static void listForWeek(Reservations a,String[] b){
+        a.sortReservationsByCustomer();
         if (b.length > 1) {
             if (b.length == 3) {
                 //via command without necessary input
@@ -147,6 +148,7 @@ public class Commands {
      * @param b is a param for parsed String used for commands
      */
     public static void listForDay(Reservations a, String[] b) {
+        a.sortReservationsByCustomer();
         if (b.length > 1) {
             if (b.length == 4) {
                 //via command without necessary input
@@ -167,6 +169,7 @@ public class Commands {
      * @param b is a param for parsed String used for commands
      */
     public static void listForToday(Reservations a, String[] b){
+        a.sortReservationsByCustomer();
         if (b.length > 1) {
             if (b.length == 3) {
                 //via command without necessary input
@@ -238,10 +241,11 @@ public class Commands {
         "Přepnutí týdne:\n"+
         "8/switch -- přepne z aktuálního týdne(current) na následující týden(next) a naopak\n"+
         "\n"+
+        "9/save -- uložení do souborů\n"+
+        "\n"+
         "Ukončení programu:\n"+
         "exit -- ukončí program a uloží data do souborů\n"+
         "\n"+
-        "save -- uložení do souborů\n"+
         "debug -- pro vypisování tracu chyby\n");
 
     }

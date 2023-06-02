@@ -6,7 +6,7 @@ Můj otec chtěl už dlouho implementovat rezervační systém pro Tenisový klu
 ### **Vytvoření rezervačního systému pro Tenisové kurty.**
 Tato aplikace bude ovládána přes příkazy v příkazové řádce Javy. Program bude fungovat tak, že poté, co se zapne, tak bude čekat na příkazy od uživatele. Budou zde příkazy jako např. list(vypíše časy v daném dni, ke kterým jsou přiřazené rezervace + info k dané rezervaci, v případě že zde není žádný napsaný, vyhodí hlášku); res + vstupní prvky (zarezervuje v zadaném čase zadaný kurt pro zadaný počet lidí); rem(odstranění rezervace); edit(úprava rezervace); atd. . Nadále ve výpisech bude automaticky spočítaná cena za rezervaci i za odehrané hodiny na kurtě.
 
-Veškeré příkazy budou u finální verze programy napsány v commandu help, či zde v readme.
+Veškeré příkazy a pospání funkcí jsou popsány v programu v commandu **help**.
 
 ### **Rozvržení na body.**
 -rozdělení podle času (časové úseky po 1 hodině) <br />
@@ -22,7 +22,74 @@ Veškeré příkazy budou u finální verze programy napsány v commandu help, �
 -Data jsou při ukončení programu zapsány do datové struktury **.json** s pomocí externí knihovny **GSON** pro Java Maven - toto bude primární datový výstup<br />
 
 ### **Class Diagram**
-![Class Diagram](./mermaid_diagram.png)
+```mermaid
+classDiagram
+    class Reservations {
+        - static final int cena
+        - ArrayList<Reservation> reservationList
+        - Times[][] reservedTimes
+        - Scanner sc
+        + Reservations()
+        + makeRes(customer: String, players: int, day: int, court: int, start: int, end: int)
+        + isRes(day: int, court: int, start: int, end: int): boolean
+        + removeReservation(customer: String, day: int, court: int, start: int)
+        + editReservation(customer: String, day: int, court: int, start: int)
+        + endReservation(customer: String, day: int, start: int)
+        + allCustomerReservationsForWeek(customer: String)
+        + allCustomerReservationsForDay(customer: String, day: int)
+        + allCustomerReservationsForToday(customer: String)
+        + whatIsFreeDay(day: int)
+        + whatIsFreeWeek()
+        + loadFromFile(param: int)
+        + saveToFile(param: int)
+        + saveToBin(param: int)
+    }
+
+    class Reservation {
+        - String customer
+        - int players
+        - int day
+        - int court
+        - int start
+        - int end
+        + Reservation(customer: String, players: int, day: int, court: int, start: int, end: int)
+    }
+
+    class Times {
+        - boolean[] times
+        + Times()
+        + setTimes(start: int, end: int, customer: String)
+        + remTimes(start: int, customer: String)
+        + isReserved(time: int): boolean
+    }
+
+    class Inputs {
+        + inputCus(): String
+        + inputPlayers(): int
+        + inputDay(): int
+        + inputCourt(): int
+        + inputStart(): int
+        + inputEnd(): int
+    }
+
+    class WeekDay {
+        - int id
+        - Array<String> aliases
+        + getId(): int
+        + getAliases(): Array<String>
+    }
+
+    class Main {
+        + main(args: String[]): void
+    }
+
+    Reservations "1" --> "1..*" Reservation
+    Reservations "1" --> "1..*" Times
+    Reservation "1" --> "1" Inputs
+    Reservation "1" --> "1..*" WeekDay
+    Main --> "1" Reservations
+
+```
 
 ### **Testování**
 | **#** |                   **test**                   |               **vstup**           |                   **výsledek**                      |
