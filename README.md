@@ -45,49 +45,51 @@ classDiagram
         + saveToBin(param: int)
     }
 
-    class Reservation {
-        - String customer
-        - int players
-        - int day
-        - int court
-        - int start
-        - int end
-        + Reservation(customer: String, players: int, day: int, court: int, start: int, end: int)
-    }
+class Reservation {
+- String customer
+- int players
+- int day
+- int court
+- int start
+- int end
++ Reservation(customer: String, players: int, day: int, court: int, start: int, end: int)
++ Getter(pro každou proměnnou)
++ Setter(pro každou proměnnou)
+}
 
-    class Times {
-        - boolean[] times
-        + Times()
-        + setTimes(start: int, end: int, customer: String)
-        + remTimes(start: int, customer: String)
-        + isReserved(time: int): boolean
-    }
+class Times {
+- boolean[] times
++ Times()
++ setTimes(start: int, end: int, customer: String)
++ remTimes(start: int, customer: String)
++ isReserved(time: int): boolean
+}
 
-    class Inputs {
-        + inputCus(): String
-        + inputPlayers(): int
-        + inputDay(): int
-        + inputCourt(): int
-        + inputStart(): int
-        + inputEnd(): int
-    }
+class Inputs {
++ inputCus(): String
++ inputPlayers(): int
++ inputDay(): int
++ inputCourt(): int
++ inputStart(): int
++ inputEnd(): int
+}
 
-    class WeekDay {
-        - int id
-        - Array<String> aliases
-        + getId(): int
-        + getAliases(): Array<String>
-    }
+class WeekDay {
+- int id
+- Array<String> aliases
++ getId(): int
++ getAliases(): Array<String>
+}
 
-    class Main {
-        + main(args: String[]): void
-    }
+class Main {
++ main(args: String[]): void
+}
 
-    Reservations "1" --> "1..*" Reservation
-    Reservations "1" --> "1..*" Times
-    Reservation "1" --> "1" Inputs
-    Reservation "1" --> "1..*" WeekDay
-    Main --> "1" Reservations
+Reservations "1" --> "1..*" Reservation
+Reservations "1" --> "1..*" Times
+Reservation "1" --> "1" Inputs
+Reservation "1" --> "1..*" WeekDay
+Main --> "1" Reservations
 
 ```
 

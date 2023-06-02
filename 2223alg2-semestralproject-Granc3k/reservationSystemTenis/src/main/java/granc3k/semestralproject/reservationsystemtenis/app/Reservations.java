@@ -430,4 +430,11 @@ public class Reservations{
             }
         });
     }
+    public void listAll(){
+        String vypis="";
+        for(Reservation temp : reservationList){
+            vypis=temp.getCus()+" ; "+whichDay(temp.getDay())+" ; kurt: "+temp.getCourt()+" ; hráči: "+temp.getPla()+" ; od: "+hours(temp.getStart())+" ; do:"+hours(temp.getEnd());
+            System.out.println(vypis);
+        }
+    }
 }

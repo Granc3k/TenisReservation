@@ -29,3 +29,4 @@ Vhodné hlášky pro uživatele nebo Help, aby mohl aplikaci otestovat i ten, kd
 //TODO k bodu 4 v MAIN přidat projetí všechny data
 //DONE opravit bin soubor load a save
 //DONE Comparator podle jména při výpisu
+//TODO Comparable

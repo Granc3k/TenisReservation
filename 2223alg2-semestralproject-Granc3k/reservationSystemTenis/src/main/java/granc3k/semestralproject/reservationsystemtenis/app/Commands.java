@@ -204,6 +204,11 @@ public class Commands {
         a.whatIsFreeToday();
     }
 
+    public static void listAll(Reservations a){
+        a.sortReservationsByCustomer();
+        a.listAll();
+    }
+
 
 
     /**

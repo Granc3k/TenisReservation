@@ -133,6 +133,9 @@ public class Main {
                             }default -> System.out.println("Zadali jste něco špatně...");
                         }
                     }
+                    case "10","listall" -> {
+                        Commands.listAll(reservations);
+                    }
                     case "exit" -> {
                         System.out.println("Zavírám program a ukládám data");
                         reservations_current.saveToFile(thisWeek);
@@ -168,6 +171,7 @@ public class Main {
         "7 - pro výpis volných časů\n"+
         "8 - pro přepnutí aktuálního týdne s následujícím\n"+
         "9 - pro uložení do souborů\n"+
+        "10 - pro výpis všech dat z tohoto týdne\n"+
         "help - pro pomoc se zadáváním hodnot, nebo příkazů\n"+
         "exit - pro vypnutí programu");
     }
