@@ -70,12 +70,14 @@ public class Main {
                     case "list","4" -> {
                         System.out.println("dnes -- pro výpis dneška\n"+
                                            "den -- pro výpis dne\n"+
-                                           "tyden -- pro výpis týdne");
+                                           "tyden -- pro výpis týdne\n"+
+                                           "datum -- pro určité datum");
                         String decision = sc.next();
                             switch(decision){
                                 case "dnes","today","t"->Commands.listForToday(reservations,parts);
                                 case "tyden","week","w"->Commands.listForWeek(reservations,parts);
                                 case "den","day","d"->Commands.listForDay(reservations,parts);
+                                case "datum","date"->Commands.listForDate();
                             }
                     }
                     case "isres","5" -> Commands.isRes(reservations,parts);

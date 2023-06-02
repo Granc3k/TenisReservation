@@ -208,6 +208,11 @@ public class Commands {
         a.sortReservationsByCustomer();
         a.listAll();
     }
+    public static void listForDate(){
+        Reservations temp = new Reservations();
+        System.out.println("Zadejte datum");
+        temp.findReservationFileByDateJson();
+    }
 
 
 

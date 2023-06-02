@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import granc3k.semestralproject.reservationsystemtenis.utils.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -437,4 +438,69 @@ public class Reservations{
             System.out.println(vypis);
         }
     }
+    public void sortReservationList() {
+        Collections.sort(reservationList);
+    }
+
+    public void findReservationFileByDate(String date, String customer) {
+        System.out.println("Z jakých souborů chcete načítat: bin/json");
+        String dec = sc.next();
+        String directoryPath="";
+        String endOfFile="";
+        switch(dec){
+            case "json"->{
+                directoryPath = "./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/json/";
+                endOfFile =".json";
+            }
+            case "bin"->{
+                directoryPath="./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/bin/";
+                endOfFile=".dat";
+            }
+        }
+        File directory = new File(directoryPath);
+        File[] files = directory.listFiles();
+
+        if (files != null) {
+            for (File file : files) {
+                if (file.getName().startsWith("save_") && file.getName().endsWith(endOfFile)) {
+                    String weekNumberString = file.getName().substring(5, file.getName().length() - 5);
+                    try {
+                        int weekNumber = Integer.parseInt(weekNumberString);
+                        if(weekNumber == getWeekNumber(date)){
+                            if(dec.equals("bin")){
+                                loadFromBin(weekNumber);
+                            }else{
+                                loadFromFile(weekNumber);
+                            }
+                        }
+                    } catch (NumberFormatException e) {
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        // Nenalezen žádný soubor pro zadané datum
+
+    }
+
+    public int getWeekNumber(String dateString) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            Date date = dateFormat.parse(dateString);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+
+            return calendar.get(Calendar.WEEK_OF_YEAR);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        return -1;
+    }
+
 }

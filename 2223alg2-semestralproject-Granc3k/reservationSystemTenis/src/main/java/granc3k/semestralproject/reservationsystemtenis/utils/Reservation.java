@@ -2,7 +2,7 @@ package granc3k.semestralproject.reservationsystemtenis.utils;
 
 import java.util.Scanner;
 
-public class Reservation {
+public class Reservation implements Comparable<Reservation> {
     public static Scanner sc = new Scanner(System.in);
     private String customer;
     private int players;
@@ -10,6 +10,10 @@ public class Reservation {
     private int court;
     private int startHour;
     private int endHour;
+    @Override
+    public int compareTo(Reservation other) {
+        return this.customer.compareTo(other.customer);
+    }
 
     /**
      * constructor for object
@@ -111,4 +115,5 @@ public class Reservation {
     public String getCus() {
         return customer;
     }
+
 }
