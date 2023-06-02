@@ -26,7 +26,7 @@ Vhodné hlášky pro uživatele nebo Help, aby mohl aplikaci otestovat i ten, kd
 
 //DONE Class Diagram zmenšit(hodit jen důležité metody)
 //TODO prohlížení starých rezervací na základě datumu
-//TODO k bodu 4 v MAIN přidat projetí všechny data
+//DONE k bodu 4 v MAIN přidat projetí všechny data
 //DONE opravit bin soubor load a save
 //DONE Comparator podle jména při výpisu
-//TODO Comparable
+//DONE Comparable

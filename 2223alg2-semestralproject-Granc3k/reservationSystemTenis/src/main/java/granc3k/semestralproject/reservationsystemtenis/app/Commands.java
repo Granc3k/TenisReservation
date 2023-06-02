@@ -3,8 +3,13 @@ package granc3k.semestralproject.reservationsystemtenis.app;
 // data in commands hierarchically sorted: customer, players, day, court, start, end,
 
 import granc3k.semestralproject.reservationsystemtenis.app.Reservations;
+import granc3k.semestralproject.reservationsystemtenis.utils.Inputs;
+
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Commands {
+    public static Scanner sc = new Scanner(System.in);
     /**
      * makes reservation
      * @param a is a parameter of object that you work with
@@ -208,12 +213,22 @@ public class Commands {
         a.sortReservationsByCustomer();
         a.listAll();
     }
-    public static void listForDate(){
+    public static void listForDate() {
         Reservations temp = new Reservations();
-        System.out.println("Zadejte datum");
-        temp.findReservationFileByDateJson();
+        int[] weekNum = Inputs.inputDate();
+        String customer = Inputs.inputCus();
+        temp.findReservationFileByDate(weekNum[0]);
+        if (temp != null) {
+            temp.allCustomerReservationsForDay(customer, weekNum[1]);
+        } else {
+            System.err.println("Soubor nebyl nalezen :(");
+        }
     }
 
+    public static void listByName() throws IOException {
+        String customer = Inputs.inputCus();
+        Reservations.listByName(customer);
+    }
 
 
     /**
@@ -221,8 +236,8 @@ public class Commands {
      * prints out necessary information to every command
      */
     public static void help() {
-        System.out.println("\n"+
-        "Tvoření rezervace:\n"+
+        System.out.println("\n" +
+                "Tvoření rezervace:\n" +
         "1/res -- vytváří rezervaci, uživatel doplní parametry\n"+
         "1/res [rezervující(ve tvaru jmeno.prijmeni)] [počet hráčů] [den (textem)] [číslo kurtu] [od kdy (ve formátu xx:00)][do kdy (ve formátu xx:00)]\n"+
         "\n"+

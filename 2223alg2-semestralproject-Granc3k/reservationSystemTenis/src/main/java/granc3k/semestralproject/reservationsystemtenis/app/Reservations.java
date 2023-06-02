@@ -442,17 +442,17 @@ public class Reservations{
         Collections.sort(reservationList);
     }
 
-    public void findReservationFileByDate(String date, String customer) {
+    public void findReservationFileByDate(int weekNum) {
         System.out.println("Z jakých souborů chcete načítat: bin/json");
         String dec = sc.next();
-        String directoryPath="";
-        String endOfFile="";
-        switch(dec){
-            case "json"->{
+        String directoryPath = "";
+        String endOfFile = "";
+        switch (dec) {
+            case "json" -> {
                 directoryPath = "./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/json/";
-                endOfFile =".json";
+                endOfFile = ".json";
             }
-            case "bin"->{
+            case "bin" -> {
                 directoryPath="./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/bin/";
                 endOfFile=".dat";
             }
@@ -465,42 +465,51 @@ public class Reservations{
                 if (file.getName().startsWith("save_") && file.getName().endsWith(endOfFile)) {
                     String weekNumberString = file.getName().substring(5, file.getName().length() - 5);
                     try {
-                        int weekNumber = Integer.parseInt(weekNumberString);
-                        if(weekNumber == getWeekNumber(date)){
-                            if(dec.equals("bin")){
-                                loadFromBin(weekNumber);
-                            }else{
-                                loadFromFile(weekNumber);
+                        int fileNumber = Integer.parseInt(weekNumberString);
+                        if (fileNumber == weekNum) {
+                            if (dec.equals("bin")) {
+                                loadFromBin(weekNum);
+                            } else {
+                                loadFromFile(weekNum);
                             }
                         }
-                    } catch (NumberFormatException e) {
-
                     } catch (Exception e) {
+                        System.err.println("Došlo k chybě při nacházení souboru");
                         e.printStackTrace();
                     }
                 }
             }
         }
-
-        // Nenalezen žádný soubor pro zadané datum
-
     }
 
-    public int getWeekNumber(String dateString) {
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-            Date date = dateFormat.parse(dateString);
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-
-            return calendar.get(Calendar.WEEK_OF_YEAR);
-        } catch (Exception e) {
-            e.printStackTrace();
-
+    public static void listByName(String customer) throws IOException {
+        System.out.println("Z jakých souborů chcete načítat: bin/json");
+        String dec = sc.next();
+        String directoryPath = "";
+        String endOfFile = "";
+        switch (dec) {
+            case "json" -> {
+                directoryPath = "./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/json/";
+                endOfFile = ".json";
+            }
+            case "bin" -> {
+                directoryPath = "./2223alg2-semestralproject-Granc3k/reservationSystemTenis/data/bin/";
+                endOfFile = ".dat";
+            }
         }
-
-        return -1;
+        File directory = new File(directoryPath);
+        File[] files = directory.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                String weekNumberString = file.getName().substring(5, file.getName().length() - 5);
+                int fileNumber = Integer.parseInt(weekNumberString);
+                System.out.println("Týden:" + fileNumber);
+                Reservations temp = new Reservations();
+                temp.loadFromFile(fileNumber);
+                temp.allCustomerReservationsForWeek(customer);
+            }
+        }
     }
+
 
 }

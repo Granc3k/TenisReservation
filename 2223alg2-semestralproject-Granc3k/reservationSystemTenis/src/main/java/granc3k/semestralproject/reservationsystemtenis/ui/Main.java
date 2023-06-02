@@ -17,14 +17,14 @@ public class Main {
         boolean end = false;
         Reservations reservations_current = new Reservations();
         Reservations reservations_next = new Reservations();
-        int thisWeek = LocalDateTime.now().getDayOfYear()/7 ;
-        int nextWeek = (LocalDateTime.now().getDayOfYear()/7)+1;
+        int thisWeek = LocalDateTime.now().getDayOfYear() / 7 + 1;
+        int nextWeek = (LocalDateTime.now().getDayOfYear() / 7) + 2;
         boolean switchedWeeks = false;
-        String prompt = "current_"+thisWeek;
+        String prompt = "current_" + thisWeek;
         boolean debug = false;
         boolean loaded = false;
 
-        while(!loaded) {
+        while (!loaded) {
             //choose load
             System.out.println("Jak chcete načíst soubory: bin/json");
             String dec = sc.next();
@@ -68,16 +68,18 @@ public class Main {
                     case "edit","2" -> Commands.editRes(reservations, parts);
                     case "rem","3" -> Commands.remRes(reservations, parts);
                     case "list","4" -> {
-                        System.out.println("dnes -- pro výpis dneška\n"+
-                                           "den -- pro výpis dne\n"+
-                                           "tyden -- pro výpis týdne\n"+
-                                           "datum -- pro určité datum");
+                        System.out.println("dnes -- pro výpis dneška\n" +
+                                "den -- pro výpis dne\n" +
+                                "tyden -- pro výpis týdne\n" +
+                                "datum -- pro určité datum\n" +
+                                "vse -- pro všechna data zákazníka\n");
                         String decision = sc.next();
                             switch(decision){
                                 case "dnes","today","t"->Commands.listForToday(reservations,parts);
                                 case "tyden","week","w"->Commands.listForWeek(reservations,parts);
                                 case "den","day","d"->Commands.listForDay(reservations,parts);
-                                case "datum","date"->Commands.listForDate();
+                                case "datum", "date" -> Commands.listForDate();
+                                case "all", "vse" -> Commands.listByName();
                             }
                     }
                     case "isres","5" -> Commands.isRes(reservations,parts);
